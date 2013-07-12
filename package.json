@@ -1,0 +1,47 @@
+{
+  "name": "motley",
+  "version": "0.0.0",
+  "description": "a band of merry middleware",
+  "main": "index.js",
+  "dependencies": {
+    "pause": "0.0.1",
+    "idgen": "~1.3.0",
+    "expres": "0.0.4",
+    "that": "~1.0.3",
+    "middler": "~0.6.1",
+    "formidable": "~1.0.14",
+    "modeler-redis": "~0.3.1",
+    "sess": "~0.1.1",
+    "safer": "~0.1.4",
+    "haredis": "~0.2.14",
+    "request": "~2.22.0",
+    "buffet": "~0.6.0",
+    "templ": "~0.1.4",
+    "witwip": "~1.0.2",
+    "js-yaml": "~2.1.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/carlos8f/motley.git"
+  },
+  "homepage": "https://github.com/carlos8f/motley",
+  "keywords": [
+    "app",
+    "framework",
+    "bacon",
+    "yeah"
+  ],
+  "author": "Carlos Rodriguez <carlos@s8f.org> (http://s8f.org/)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "8873d7c4bca4c433dd18ab4bb09e16dbb04b5f2e",
+  "bugs": {
+    "url": "https://github.com/carlos8f/motley/issues"
+  }
+}
