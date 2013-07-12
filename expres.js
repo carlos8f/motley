@@ -1,7 +1,4 @@
 var app = require('./');
 
-if (!app.expres) {
-  app.expres = require('expres').middleware;
-  require('./router');
-  app.router.first(app.expres);
-}
+module.exports = require('expres').middleware;
+module.exports.weight = -1000;

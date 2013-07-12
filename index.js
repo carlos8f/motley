@@ -1,10 +1,12 @@
-var dirname = require('path').dirname;
+var dirname = require('path').dirname
+  , witwip = require('witwip')
 
 var app = module.exports = new (require('events').EventEmitter);
 app.setMaxListeners(0);
 
+// boot the pkginfo and conf
 app.boot = function (cb) {
-  require('./pkg')(function (err, p, pkg) {
+  witwip(module.parent, function (err, p, pkg) {
     if (err) return cb(err);
     app.root = dirname(p);
     app.pkg = pkg;
@@ -15,4 +17,11 @@ app.boot = function (cb) {
       cb();
     });
   });
+};
+
+// the band of merry middleware
+app.motley = function () {
+  require('./vhost');
+  require('./router');
+  app.router.add(app.vhost('*', __dirname + '/*.js'));
 };

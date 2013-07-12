@@ -1,15 +1,20 @@
-var app = require('./');
+var app = require('./')
+  , pause = require('pause')
 
-if (!app.pause) {
-  var pause = require('pause');
-  require('./router');
-  app.pause = function pause (req, res, next) {
-    // buffer incoming data until resume() is called
+module.exports = function (req, res, next) {
+  // buffer incoming data until resume() is called
+  req.pause = function () {
+    if (req.paused) return;
+    req.paused = true;
     var paused = pause(req);
     req.resume = function () {
+      if (!req.paused) return;
+      req.paused = false;
       paused.resume();
     };
-    next();
   };
-  app.router.first(app.pause);
-}
+  req.pause();
+  next();
+};
+
+module.exports.weight = -5000;

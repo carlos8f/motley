@@ -7,7 +7,7 @@
     "pause": "0.0.1",
     "idgen": "~1.3.0",
     "expres": "0.0.4",
-    "middler": "~0.6.1",
+    "middler": "~0.7.0",
     "formidable": "~1.0.14",
     "modeler-redis": "~0.3.1",
     "sess": "~0.1.1",
@@ -17,7 +17,8 @@
     "buffet": "~0.6.0",
     "templ": "~0.1.4",
     "witwip": "~1.0.2",
-    "js-yaml": "~2.1.0"
+    "js-yaml": "~2.1.0",
+    "glob": "~3.2.3"
   },
   "devDependencies": {
     "mocha": "*"

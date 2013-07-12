@@ -1,4 +1,3 @@
-var app = require('./')
-  , idgen = require('idgen')
+var app = require('./');
 
-  app.idgen = require('idgen');
+if (!app.idgen) app.idgen = require('idgen');
