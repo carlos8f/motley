@@ -5,16 +5,10 @@ if (!app.loadConf) {
     , yaml = require('js-yaml')
 
   app.loadConf = function (cb) {
-    try {
-      var conf = require(app.root + '/conf.yml');
-    }
+    try { var conf = require(app.root + '/conf.yml'); }
     catch (e) {
-      try {
-        var conf = require(app.root + '/conf.json');
-      }
-      catch (e) {
-        var conf = {};
-      }
+      try { var conf = require(app.root + '/conf.json'); }
+      catch (e) { var conf = {}; }
     }
 
     // prompt for a passphrase

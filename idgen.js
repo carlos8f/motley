@@ -1,5 +1,4 @@
 var app = require('./')
-  , idgen = require('idgen');
+  , idgen = require('idgen')
 
   app.idgen = require('idgen');
-  
