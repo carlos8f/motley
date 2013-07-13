@@ -4,8 +4,7 @@ var app = require('motley')
 require('motley/plugins/controller');
 require('../models/posts');
 
-var controller = app.controller();
-module.exports = controller.handler;
+var controller = module.exports = app.controller();
 
 function requireAuth (req, res, next) {
   if (req.user) next();

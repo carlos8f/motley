@@ -8,8 +8,9 @@ if (!app.vhost) {
     var vhost = app.controller();
     if (!~filePattern.match(/\*\.js$/)) filePattern += '*.js';
     app.glob.sync(filePattern, {cwd: app.root}).forEach(function (p) {
-      var handler = require(p);
-      if (typeof handler === 'function') vhost.add(hostPattern, handler.weight, handler.handler || handler);
+      var moduleExports = require(p);
+      var handler = moduleExports.handler || moduleExports;
+      if (typeof handler === 'function') vhost.add(hostPattern, handler.weight, handler);
     });
     vhost.add(10000, function (req, res, next) {
       next();

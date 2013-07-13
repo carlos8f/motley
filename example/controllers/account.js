@@ -3,8 +3,7 @@ var app = require('motley');
 require('motley/plugins/controller');
 require('motley/models/users');
 
-var controller = app.controller();
-module.exports = controller.handler;
+var controller = module.exports = app.controller();
 
 controller
   // just upsert a user and log them in
