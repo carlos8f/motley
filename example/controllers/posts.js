@@ -15,7 +15,7 @@ function requireAuth (req, res, next) {
 controller
   .get('/', function (req, res, next) {
     var posts = [];
-    app.posts.list({load: true}, function (err, chunk, next) {
+    app.posts.tail({load: true}, function (err, chunk, next) {
       if (err) return next(err);
       posts = posts.concat(chunk);
       if (chunk.length && next) next();
