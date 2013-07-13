@@ -1,4 +1,4 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.redis) {
   var haredis = require('haredis');

@@ -1,5 +1,4 @@
-var app = require('./')
-  , formidable = require('formidable')
+var formidable = require('formidable');
 
 module.exports = function (req, res, next) {
   if (typeof req.paused === 'undefined') return next(new Error('body requires pause'));

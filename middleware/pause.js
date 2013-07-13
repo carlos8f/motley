@@ -1,5 +1,4 @@
-var app = require('./')
-  , pause = require('pause')
+var pause = require('pause');
 
 module.exports = function (req, res, next) {
   // buffer incoming data until resume() is called

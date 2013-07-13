@@ -1,3 +1,3 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.buffet) app.buffet = require('buffet');

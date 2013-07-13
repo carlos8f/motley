@@ -1,4 +1,4 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.notFound) {
   app.notFound = function (req, res, next) {

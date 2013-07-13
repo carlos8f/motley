@@ -1,4 +1,4 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.loadConf) {
   var safer = require('safer')

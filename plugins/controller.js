@@ -1,4 +1,4 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.controller)  {
   var middler = require('middler');

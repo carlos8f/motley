@@ -1,6 +1,6 @@
-var app = require('./');
+var app = require('../');
 
-require('./users');
+require('../models/users');
 
 module.exports = function (req, res, next) {
   if (!req.session) return next(new Error('auth requires session'));

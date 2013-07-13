@@ -1,3 +1,3 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.dish) app.dish = require('dish');

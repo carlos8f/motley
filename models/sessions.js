@@ -1,6 +1,6 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.sessions) {
-  require('./collection');
+  require('../plugins/collection');
   app.sessions = app.collection({name: 'sessions'});
 }

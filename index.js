@@ -10,7 +10,7 @@ app.boot = function (cb) {
     if (err) return cb(err);
     app.root = dirname(p);
     app.pkg = pkg;
-    require('./conf');
+    require('./plugins/conf');
     app.loadConf(function (err, conf) {
       if (err) return cb(err);
       app.conf = conf;
@@ -22,17 +22,17 @@ app.boot = function (cb) {
 // the band of merry middleware, plus app controllers
 app.motley = function () {
   // generic vhosts
-  require('./vhost');
-  app.vhost('*', __dirname + '/*.js');
+  require('./plugins/vhost');
+  app.vhost('*', __dirname + '/middleware/*.js');
   app.vhost('*', app.root + '/controllers/*.js');
 
-  require('./router');
+  require('./plugins/router');
 
   // generic favicon
-  require('./favicon');
-  app.router.get(500, '/favicon.ico', app.favicon);
+  require('./plugins/favicon');
+  app.router.get(500, '/favicon.ico', app.favicon());
 
   // generic 404 handler
-  require('./404');
+  require('./plugins/404');
   app.router.add(10000, app.notFound);
 };

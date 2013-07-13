@@ -1,7 +1,7 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.users) {
-  require('./collection');
+  require('../plugins/collection');
 
   app.users = app.collection({
     name: 'users'

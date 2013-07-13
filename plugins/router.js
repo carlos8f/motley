@@ -1,4 +1,4 @@
-var app = require('./');
+var app = require('../');
 
 if (!app.router) {
   if (app.conf.https) require('./https');
