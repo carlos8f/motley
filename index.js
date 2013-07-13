@@ -30,7 +30,7 @@ app.motley = function () {
 
   // generic favicon
   require('./favicon');
-  app.router.get(9000, '/favicon.ico', app.favicon);
+  app.router.get(500, '/favicon.ico', app.favicon);
 
   // generic 404 handler
   require('./404');
