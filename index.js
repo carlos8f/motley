@@ -21,13 +21,18 @@ app.boot = function (cb) {
 
 // the band of merry middleware, plus app controllers
 app.motley = function () {
-  // * vhosts
+  // generic vhosts
   require('./vhost');
   app.vhost('*', __dirname + '/*.js');
   app.vhost('*', app.root + '/controllers/*.js');
 
-  // 404 handler
   require('./router');
+
+  // generic favicon
+  require('./favicon');
+  app.router.get(9000, '/favicon.ico', app.favicon);
+
+  // generic 404 handler
   require('./404');
   app.router.add(10000, app.notFound);
 };
