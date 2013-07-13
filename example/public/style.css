@@ -21,3 +21,7 @@ input, textarea {
 .submit:hover {
   color: #e00;
 }
+a {
+  color: #e00;
+  text-decoration: none;
+}

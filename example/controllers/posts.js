@@ -20,7 +20,7 @@ controller
       if (chunk.length && next) next();
       else res.render('index', {
         title: 'motley example',
-        loggedIn: !!req.user,
+        user: req.user,
         posts: posts
       });
     });

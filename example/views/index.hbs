@@ -1,8 +1,8 @@
 <h1>motley example: a simple blog</h1>
 
-{{#if loggedIn}}
+{{#if user}}
   <ul class="account">
-    <li><a href="/logout">log out</a></li>
+    <li>logged in as {{user.id}} <a href="/logout">[log out]</a></li>
   </ul>
   {{> partials/form}}
 {{else}}
