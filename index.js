@@ -19,9 +19,15 @@ app.boot = function (cb) {
   });
 };
 
-// the band of merry middleware
+// the band of merry middleware, plus app controllers
 app.motley = function () {
+  // * vhosts
   require('./vhost');
+  app.vhost('*', __dirname + '/*.js');
+  app.vhost('*', app.root + '/controllers/*.js');
+
+  // 404 handler
   require('./router');
-  app.router.add(app.vhost('*', __dirname + '/*.js'));
+  require('./404');
+  app.router.add(10000, app.notFound);
 };

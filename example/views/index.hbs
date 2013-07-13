@@ -1,0 +1,16 @@
+<h1>motley example: a simple blog</h1>
+
+{{#if loggedIn}}
+  <ul class="account">
+    <li><a href="/logout">log out</a></li>
+  </ul>
+  {{> partials/form}}
+{{else}}
+  {{> partials/login}}
+{{/if}}
+
+{{#if posts}}<h2>posts</h2>{{/if}}
+
+<ul class="posts">
+{{#each posts}}{{> partials/item-post}}{{/each}}
+</ul>

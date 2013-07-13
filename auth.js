@@ -1,5 +1,7 @@
 var app = require('./');
 
+require('./users');
+
 module.exports = function (req, res, next) {
   if (!req.session) return next(new Error('auth requires session'));
   req.login = function (user) {
@@ -10,7 +12,7 @@ module.exports = function (req, res, next) {
     req.user = null;
     req.session.auth = null;
   };
-  if (req.session.auth && app.users) {
+  if (req.session.auth) {
     app.users.load(req.session.auth, function (err, user) {
       if (err) return next(err);
       if (user) req.login(user);
@@ -20,4 +22,4 @@ module.exports = function (req, res, next) {
   }
   else next();
 };
-module.exports.weight = -1000;
+module.exports.weight = -100;
