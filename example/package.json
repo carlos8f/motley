@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "marked": "~0.2.9",
-    "motley": "~0.2.0"
+    "motley": "~0.3.0"
   }
 }
