@@ -1,7 +1,6 @@
 var app = require('motley')
   , marked = require('marked')
 
-require('motley/plugins/controller');
 require('../models/posts');
 
 var controller = module.exports = app.controller();

@@ -1,8 +1,5 @@
 var app = require('motley');
 
-require('motley/plugins/controller');
-require('motley/models/users');
-
 var controller = module.exports = app.controller();
 
 controller

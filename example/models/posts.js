@@ -1,7 +1,5 @@
 var app = require('motley');
 
-require('motley/plugins/collection');
-
 app.posts = app.collection({
   name: 'posts',
   save: function (post, cb) {

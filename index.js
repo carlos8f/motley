@@ -9,6 +9,7 @@ app.boot = function (cb) {
   witwip(module.parent, function (err, p, pkg) {
     if (err) return cb(err);
     app.root = dirname(p);
+    app.core = __dirname;
     app.pkg = pkg;
     require('./plugins/conf');
     app.loadConf(function (err, conf) {
@@ -19,20 +20,19 @@ app.boot = function (cb) {
   });
 };
 
-// the band of merry middleware, plus app controllers
+// the band of merry middleware
 app.motley = function () {
-  // generic vhosts
-  require('./plugins/vhost');
-  app.vhost('*', __dirname + '/middleware/*.js');
-  app.vhost('*', app.root + '/controllers/*.js');
+  // load core plugins
+  require('./plugins/load');
+  app.load(app.core + '/plugins');
 
-  require('./plugins/router');
+  // mount middleware and controllers
+  app.vhost('*', app.core + '/middleware');
+  app.vhost('*', app.root + '/controllers');
 
   // generic favicon
-  require('./plugins/favicon');
   app.router.get(500, '/favicon.ico', app.favicon());
 
   // generic 404 handler
-  require('./plugins/404');
-  app.router.add(10000, app.notFound);
+  app.router.add(10000, app.handle404);
 };
