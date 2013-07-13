@@ -41,16 +41,3 @@ controller
       res.redirect('/posts/' + post.id);
     });
   })
-  .put('/posts/:id', requireAuth, function (req, res, next) {
-    req.body.id = req.params.id;
-    app.posts.save(req.body, function (err, post) {
-      if (err) return next(err);
-      res.redirect('/posts/' + post.id);
-    });
-  })
-  .delete('/posts/:id', requireAuth, function (req, res, next) {
-    app.posts.destroy(req.params.id, function (err) {
-      if (err) return next(err);
-      res.redirect('/');
-    });
-  })
