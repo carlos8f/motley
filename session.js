@@ -3,8 +3,7 @@ var app = require('./')
 
 var conf = app.conf.session || {};
 conf.cookie || (conf.cookie = {});
-if (typeof conf.cookie.maxAge === 'undefined')
-  conf.cookie.maxAge = 86400 * 365; // one year
+if (typeof conf.cookie.maxAge === 'undefined') conf.cookie.maxAge = 86400 * 365;
 conf.key || (conf.key = app.pkg.name);
 
 require('./sessions');
