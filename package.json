@@ -20,7 +20,8 @@
     "js-yaml": "~2.1.0",
     "glob": "~3.2.3",
     "dish": "~0.1.2",
-    "href": "~0.1.1"
+    "href": "~0.1.1",
+    "qs": "~0.6.5"
   },
   "devDependencies": {
     "mocha": "*"
