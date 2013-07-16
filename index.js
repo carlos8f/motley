@@ -22,12 +22,14 @@ app.boot = function (cb) {
 
 // the band of merry middleware
 app.motley = function () {
-  // load core plugins
+  // load plugins
   require('./plugins/load');
   app.load(app.core + '/plugins');
+  app.load(app.root + '/plugins');
 
   // mount middleware and controllers
   app.vhost('*', app.core + '/middleware');
+  app.vhost('*', app.root + '/middleware');
   app.vhost('*', app.root + '/controllers');
 
   // generic favicon
