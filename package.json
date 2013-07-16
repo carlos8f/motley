@@ -1,6 +1,6 @@
 {
   "name": "motley",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "a band of merry middleware",
   "main": "index.js",
   "dependencies": {
