@@ -1,7 +1,7 @@
 {
   "name": "motley",
   "version": "0.4.6",
-  "description": "a band of merry middleware",
+  "description": "an alternative rapid web development framework",
   "main": "index.js",
   "dependencies": {
     "pause": "0.0.1",

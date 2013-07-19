@@ -1,9 +1,18 @@
 motley
 ======
 
-a band of merry middleware
+an alternative rapid web development framework
 
 [![build status](https://secure.travis-ci.org/carlos8f/motley.png)](http://travis-ci.org/carlos8f/motley)
+
+## Idea
+
+Motley is an "alternative" framework whose goal is to bundle independently usable
+modules into a cohesive workflow for rapid website development. You won't see any
+monolithic implementations going on here. Think of it as a starter kit for your
+app, and a plugin-centric way of developing it.
+
+## 
 
 - - -
 
