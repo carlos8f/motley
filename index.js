@@ -5,7 +5,7 @@ app.setMaxListeners(0);
 
 // boot the pkginfo and conf
 app.boot = function (cb) {
-  app.root = process.cwd();
+  if (!app.root) app.root = process.cwd();
   app.core = __dirname;
   try {
     app.pkg = require(app.root + '/package.json');
@@ -14,9 +14,7 @@ app.boot = function (cb) {
     app.pkg = {
       name: 'untitled',
       version: '0.0.0',
-      description: 'a motley app',
-      main: process.argv.length > 1 ? basename(process.argv[1]) : undefined,
-      dependencies: {}
+      description: 'a motley app'
     };
   }
   require('./plugins/conf');
