@@ -1,5 +1,4 @@
-motley
-======
+![motley](https://raw.github.com/carlos8f/motley/master/assets/motley-full.png)
 
 an alternative rapid web development framework
 
