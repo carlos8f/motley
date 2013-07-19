@@ -37,7 +37,7 @@ When you initially `require('motley')` from your app, you get three things:
   create it. It's also an `EventEmitter` if you like sort kind of thing.
 2. `app.boot(cb)`: Reads `./conf.yml` or `./conf.json` (if exists) and puts the
    parsed result on `app.conf`. Also reads `./package.json` (if exists) and puts
-   that on `app.pkg`.
+   that on `app.pkg`. Calls `cb` after, with an `err` if anything went wrong.
 3. `app.motley()`: Synchronously loads all of Motley's built-in plugins, middleware
    and your app's plugins and middleware on `app`, in that order.
 
