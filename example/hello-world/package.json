@@ -1,5 +1,5 @@
 {
-  "name": "motley-example",
+  "name": "motley-example-hello-world",
   "version": "0.0.0",
   "description": "example using motley",
   "main": "server.js",
@@ -9,7 +9,6 @@
   "author": "Carlos Rodriguez <carlos@s8f.org> (http://s8f.org/)",
   "license": "MIT",
   "dependencies": {
-    "marked": "~0.2.9",
-    "motley": "~0.3.0"
+    "motley": "~0.4.6"
   }
 }
