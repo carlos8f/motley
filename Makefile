@@ -1,4 +1,5 @@
 test:
+	@cd example && make
 	@./node_modules/.bin/mocha \
 		--reporter spec \
 		--bail \
