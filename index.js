@@ -1,22 +1,29 @@
-var dirname = require('path').dirname
-  , witwip = require('witwip')
+var basename = require('path').basename;
 
 var app = module.exports = new (require('events').EventEmitter);
 app.setMaxListeners(0);
 
 // boot the pkginfo and conf
 app.boot = function (cb) {
-  witwip(module.parent, function (err, p, pkg) {
+  app.root = process.cwd();
+  app.core = __dirname;
+  try {
+    app.pkg = require(app.root + '/package.json');
+  }
+  catch (e) {
+    app.pkg = {
+      name: 'untitled',
+      version: '0.0.0',
+      description: 'a motley app',
+      main: process.argv.length > 1 ? basename(process.argv[1]) : undefined,
+      dependencies: {}
+    };
+  }
+  require('./plugins/conf');
+  app.loadConf(function (err, conf) {
     if (err) return cb(err);
-    app.root = dirname(p);
-    app.core = __dirname;
-    app.pkg = pkg;
-    require('./plugins/conf');
-    app.loadConf(function (err, conf) {
-      if (err) return cb(err);
-      app.conf = conf;
-      cb();
-    });
+    app.conf = conf;
+    cb();
   });
 };
 

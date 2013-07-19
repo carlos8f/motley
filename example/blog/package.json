@@ -9,7 +9,6 @@
   "author": "Carlos Rodriguez <carlos@s8f.org> (http://s8f.org/)",
   "license": "MIT",
   "dependencies": {
-    "marked": "~0.2.9",
-    "motley": "~0.4.6"
+    "marked": "~0.2.9"
   }
 }

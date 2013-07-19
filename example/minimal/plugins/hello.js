@@ -1,4 +1,4 @@
-var app = require('motley');
+var app = require('../../../');
 
 app.hello = function () {
   console.log('hello world!');

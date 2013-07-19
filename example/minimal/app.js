@@ -1,8 +1,8 @@
-var app = require('../../');
+var app = require('motley');
 
 app.boot(function (err) {
   if (err) throw err;
-  require('../../plugins/load');
+  require('motley/plugins/load');
   app.load('./plugins');
-  // etc
+  app.hello();
 });
