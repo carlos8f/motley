@@ -3,14 +3,12 @@ var app = require('motley')
 
 require('../models/posts');
 
-var controller = module.exports = app.controller();
-
 function requireAuth (req, res, next) {
   if (req.user) next();
   else res.renderStatus(403);
 }
 
-controller
+module.exports = app.controller()
   .get('/', function (req, res, next) {
     var posts = [];
     app.posts.tail({load: true}, function (err, chunk, next) {

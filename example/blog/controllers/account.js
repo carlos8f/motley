@@ -1,8 +1,6 @@
 var app = require('motley');
 
-var controller = module.exports = app.controller();
-
-controller
+module.exports = app.controller()
   // just upsert a user and log them in
   .post('/login', function (req, res, next) {
     function logIn (err, user) {
