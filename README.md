@@ -66,12 +66,117 @@ you to
   would be undesirable
 - use an app as a plugin inside another app - "appception"!
 
-## Plugin system
+## Middleware
 
-You can always get a reference to your app by `var app = require('motley')`, even
-from inside the `node_modules` tree (by using Motley as a peer-depenency). This
-allows you to interact with the app's runtime from any module! Creating a plugin
-is as easy as:
+Middleware are a simple way of incrementally handling an HTTP request, by defining a
+function that interacts with server `req` and `res` streams, and calling
+`next()` to continue to the next handler, or `next(err)` if something went wrong.
+
+To control ordering, you may export an optional `weight` property, with `-1000`
+being equivalent to `middler().first()`, `0` being neutral, and `1000` being
+equivalent to `middler().last()`.
+
+**Auto loading**: Any paths in your project matching `./middleware/**.js` will be automatically
+required when `app.motley()` is called, and the exports of those files are expected
+to be functions that take `req, res, next` as arguments.
+
+### Example
+
+```js
+var app = require('motley');
+
+module.exports = function (req, res, next) {
+  // do something with request or response...
+  next();
+};
+
+// "heavy" weights run after other middleware
+module.exports.weight = 1000;
+```
+
+## Controllers
+
+Controllers are where routes are defined, logic is performed for requests, and
+templates are rendered.
+
+A Motley controller is simply a node module which exports an unattached instance of
+[middler](https://github.com/carlos8f/node-middler). For convenience, a new
+instance of middler can be acquired by calling `app.controller()`.
+
+**Auto loading**: Any paths in your project matching `./controllers/**.js` will
+be automatically required when `app.motley()` is called, and the exports of
+those files are expected to be [middler](https://github.com/carlos8f/node-middler)
+instances OR middleware handlers.
+
+### Example
+
+```js
+var app = require('motley')
+  , marked = require('marked')
+
+require('../models/posts');
+
+function requireAuth (req, res, next) {
+  if (req.user) next();
+  else res.renderStatus(403);
+}
+
+module.exports = app.controller()
+  .get('/', function (req, res, next) {
+    var posts = [];
+    app.posts.tail({load: true}, function (err, chunk, next) {
+      if (err) return next(err);
+      posts = posts.concat(chunk);
+      if (chunk.length && next) next();
+      else res.render('index', {
+        title: 'motley example',
+        user: req.user,
+        posts: posts
+      });
+    });
+  })
+  .get('/posts/:id', function (req, res, next) {
+    app.posts.load(req.params.id, function (err, post) {
+      if (err) return next(err);
+      if (post) res.render('post', post);
+      else res.renderStatus(404);
+    });
+  })
+  .post('/posts', requireAuth, function (req, res, next) {
+    req.body.content = marked(req.body.body);
+    req.body.author_id = req.user.id;
+    app.posts.create(req.body, function (err, post) {
+      if (err) return next(err);
+      res.redirect('/posts/' + post.id);
+    });
+  })
+```
+
+## Plugins
+
+Plugins in Motley are a simple way of bolting on functionality to `app` by
+modifying the global state when the plugin is required. Use it to expose APIs
+for your controllers or middleware to use.
+
+**Auto loading**: Any paths in your project matching `./plugins/**.js` will
+be automatically required when `app.motley()` is called, and those files are
+expected to start with `var app = require('motley')` and then modify `app` in
+some way.
+
+### Example
+
+```js
+var app = require('motley');
+
+app.hello = function () {
+  console.log('hello world!');
+};
+```
+
+### External plugins
+
+Plugins can easily be packaged as npm modules, or developed in different repos.
+Creating an external plugin is as easy as:
 
 1. create a `package.json` and add `motley` to
    [peerDependencies](http://blog.nodejs.org/2013/02/07/peer-dependencies/)
@@ -87,12 +192,14 @@ loading a plugin with the same API between when you call `app.boot()` and
 ```js
 var app = require('motley')
   , https = require('https')
+  , modeler = require('modeler')
 
 app.boot(function (err) {
   if (err) throw err;
+  app.collection = modeler; // memory store version of modeler
   app.server = https.createServer(app.conf.https);
   app.motley();
-  // now we're using https instead of http!
+  // now we're using https instead of http, and memory store instead of redis!
 });
 ```
 
