@@ -55,4 +55,13 @@ describe('blog example', function () {
       done();
     });
   });
+  it('log out', function (done) {
+    assert(!browser.html().match(/create user or log in/));
+    browser.clickLink('.account a', function (err) {
+      assert.ifError(err);
+      assert(browser.html().match(/create user or log in/));
+      assert.equal(browser.text('ul.posts li'), 'Jabberwocky (abridged) by carlos8f');
+      done();
+    });
+  });
 });
