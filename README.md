@@ -4,6 +4,8 @@ an alternative rapid web development framework
 
 [![build status](https://secure.travis-ci.org/carlos8f/motley.png)](http://travis-ci.org/carlos8f/motley)
 
+[![NPM](https://nodei.co/npm/motley.png?downloads=true)](https://nodei.co/npm/motley/)
+
 ## Idea
 
 Motley is an "alternative" framework whose goal is to bundle independently usable
