@@ -25,7 +25,11 @@ module.exports = app.controller()
   .get('/posts/:id', function (req, res, next) {
     app.posts.load(req.params.id, function (err, post) {
       if (err) return next(err);
-      if (post) res.render('post', post);
+      if (post) {
+        res.vars.post = post;
+        res.vars.title = post.title;
+        res.render('post');
+      }
       else res.renderStatus(404);
     });
   })
@@ -34,6 +38,7 @@ module.exports = app.controller()
     req.body.author_id = req.user.id;
     app.posts.create(req.body, function (err, post) {
       if (err) return next(err);
+      res.flash('post successful');
       res.redirect('/posts/' + post.id);
     });
   })

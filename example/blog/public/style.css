@@ -25,3 +25,9 @@ a {
   color: #e00;
   text-decoration: none;
 }
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}

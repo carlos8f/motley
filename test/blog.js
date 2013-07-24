@@ -45,6 +45,7 @@ describe('blog example', function () {
         assert.equal(browser.text('h2'), 'Jabberwocky (abridged)And the mome raths outgrabe.');
         assert.equal(browser.text('small'), 'by carlos8f');
         assert.equal(browser.text('.body'), 'Twas brillig, and the slithy toves And the mome raths outgrabe.');
+        assert.equal(browser.text('.message.success'), 'post successful');
         done();
       });
   });
