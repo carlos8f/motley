@@ -1,6 +1,6 @@
 {
   "name": "motley",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "an alternative rapid web development framework",
   "main": "index.js",
   "dependencies": {
