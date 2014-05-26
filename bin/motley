@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+var cmd = require('commander')
+  , child_process = require('child_process')
+  , path = require('path')
+
+cmd
+  .version(require('../package.json').version)
+  .description(require('../package.json').description)
+
+cmd
+  .command('init [dir]')
+  .description('initialize a new motley project')
+  .option('--gist', 'do not output folders, for gist compatibility')
+  .action(function (dir, options) {
+    options.dir = dir || process.cwd();
+    init(options);
+  })
+
+cmd
+  .command('run [dir]')
+  .description('run a motley project')
+  .action(function (dir, options) {
+    options.dir = dir || process.cwd();
+    run(options);
+  })
+
+if (typeof process.argv[2] === 'string' && process.argv[2].match(/^init|run$/)) {
+  cmd.parse(process.argv);
+}
+else {
+  var options = {};
+  if (typeof process.argv[2] === 'string' && process.argv[2].indexOf('-') !== 0) {
+    options.dir = process.argv[2];
+    process.argv.shift();
+  }
+  else options.dir = process.cwd();
+  run(options);
+}
+
+function init (options) {
+
+}
+
+function run (options) {
+  
+}

@@ -1,6 +1,10 @@
 var app = require('../')
   , existsSync = require('fs').existsSync
+  , templ = require('templ')
 
-require('../plugins/templ');
-module.exports = app.templ(app.conf.render);
-module.exports.weight = -1000;
+var conf = app.conf.render || {root: app.root + '/views'};
+
+if (existsSync(conf.root)) {
+  module.exports = templ(conf.root);
+  module.exports.weight = -1000;
+}

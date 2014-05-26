@@ -1,0 +1,7 @@
+{
+  "public": "*.css",
+  "controllers": ["account.js", "posts.js"],
+  "conf": "conf.yml",
+  "main": "index.js",
+  "views": "*.hbs"
+}
