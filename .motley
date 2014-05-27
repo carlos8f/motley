@@ -1,11 +1,13 @@
-afterware: afterware/**/*.js
-conf: conf.yml
-controllers: controllers/**/*.js
+afterware:
+  - "afterware/*.js"
+  - "afterware/*/index.js"
+db: "./db"
+collections:
+  - "collections/*/*.js"
+  - "collections/*/index.js"
 middleware:
-  - middleware/*.js
-  - middleware/**/index.js
+  - "middleware/*.js"
+  - "middleware/*/index.js"
 plugins:
-  - plugins/*.js
-  - plugins/**/index.js
-public: public/**/*
-views: views/**/*.hbs
+  - "plugins/*.js"
+  - "plugins/*/index.js"

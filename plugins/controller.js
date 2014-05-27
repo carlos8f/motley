@@ -1,8 +1,5 @@
-var app = require('../');
+var middler = require('middler');
 
-if (!app.controller)  {
-  var middler = require('middler');
-  app.controller = function () {
-    return middler();
-  };
-}
+module.exports = function (app) {
+  return middler;
+};

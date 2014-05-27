@@ -1,5 +1,3 @@
-var app = require('motley');
-
-app.hello = function () {
+module.exports = function (app) {
   console.log('hello world!');
 };

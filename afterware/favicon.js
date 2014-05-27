@@ -1,4 +1,8 @@
 var path = require('path')
   , dish = require('dish')
 
-module.exports = dish.file(p || path.join(__dirname, '../assets/motley.ico'));
+module.exports = function (app) {
+  return app.controller()
+    .get('/favicon.ico', dish.file(path.join(__dirname, '../assets/motley.ico')))
+    .handler;
+};

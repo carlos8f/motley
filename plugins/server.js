@@ -1,3 +1,7 @@
-var app = require('../');
+var http = require('http');
 
-if (!app.server) app.server = require('http').createServer();
+module.exports = function (app) {
+  var server = http.createServer();
+  app.router.attach(server);
+  return server;
+};

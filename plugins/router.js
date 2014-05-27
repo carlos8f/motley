@@ -1,8 +1,12 @@
-var app = require('../');
+var middler = require('middler');
 
-if (!app.router) {
-  require('./server');
-  require('./controller');
-
-  app.router = app.controller().attach(app.server);
-}
+module.exports = function (app) {
+  var router = middler(app.server);
+  setImmediate(function () {
+    router
+      .add(app.middleware.handler)
+      .add(app.controllers.handler)
+      .add(app.afterware.handler);
+  });
+  return router;
+};
