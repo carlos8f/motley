@@ -1,19 +1,14 @@
 #!/usr/bin/env node
 var cmd = require('commander')
-  , child_process = require('child_process')
-  , path = require('path')
   , motley = require('../')
 
 cmd
   .version(require('../package.json').version)
   .description('run a motley project')
-  .option('-l, --listen <port>', 'listen on a port', Number, -1)
+  .option('--port <port>', 'override listening port', Number, -1)
 
 cmd.parse(process.argv);
 
-var app = motley([path.resolve(__dirname, '..'), cmd.args[0] || process.cwd()]);
-if (cmd.listen !== -1) {
-  app.server.listen(cmd.listen, function () {
-    console.log('listening on port', app.server.address().port);
-  });
-}
+var app = motley(cmd.args[0]);
+if (cmd.port !== -1) app.conf.port = cmd.port;
+app.boot();

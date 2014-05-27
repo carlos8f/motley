@@ -1,4 +1,3 @@
-var app = require('../');
-
-var collection = require('../plugins/collection');
-module.exports = collection({name: 'sessions'});
+module.exports = function (app) {
+  return app.collection({name: 'sessions'});
+};

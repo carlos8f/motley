@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "example using motley",
   "dependencies": {
-    "marked": "~0.2.9",
-    "modeler": "~0.4.3"
+    "marked": "~0.2.9"
   }
 }
