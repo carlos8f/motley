@@ -21,6 +21,7 @@ function motley (cwd, app) {
     if (last.conf.minimal) roots = [last];
     var plugins = roots.reduce(function (prev, root) {
       Object.keys(root).forEach(function (k) {
+        if (last.conf.disable && ~last.conf.disable.indexOf(k)) return;
         if (!~prev.indexOf(k)) prev.push(k);
       });
       return prev;
