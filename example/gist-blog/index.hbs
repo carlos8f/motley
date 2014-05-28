@@ -4,13 +4,13 @@
   <ul class="account">
     <li>logged in as {{user.id}} <a href="/logout">[log out]</a></li>
   </ul>
-  {{> partials/form}}
+  {{> form}}
 {{else}}
-  {{> partials/login}}
+  {{> login}}
 {{/if}}
 
 {{#if posts}}<h2>posts</h2>{{/if}}
 
 <ul class="posts">
-{{#each posts}}{{> partials/item-post}}{{/each}}
+{{#each posts}}{{> item-post}}{{/each}}
 </ul>
