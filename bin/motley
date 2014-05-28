@@ -5,10 +5,7 @@ var cmd = require('commander')
 cmd
   .version(require('../package.json').version)
   .description('run a motley project')
-  .option('--port <port>', 'override listening port', Number, -1)
 
 cmd.parse(process.argv);
 
-var app = motley(cmd.args[0]);
-if (cmd.port !== -1) app.conf.port = cmd.port;
-app.boot();
+motley(cmd.args[0]).boot();

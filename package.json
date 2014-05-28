@@ -27,7 +27,7 @@
     "zombie": "~2.0.0-alpha19"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --bail --timeout 10s"
+    "test": "./node_modules/.bin/mocha --reporter spec --bail --timeout 10s --require test/common.js"
   },
   "repository": {
     "type": "git",

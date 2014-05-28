@@ -5,19 +5,21 @@ var path = require('path')
   , middler = require('middler')
   , EventEmitter = require('events').EventEmitter
 
-function motley (cwd) {
-  var app;
-  if (cwd === __dirname) {
-    app = new EventEmitter;
-    app.setMaxListeners(0);
+function motley (cwd, app) {
+  if (!app) {
+    if (cwd === __dirname) {
+      app = new EventEmitter;
+      app.setMaxListeners(0);
+    }
+    else app = motley(__dirname);
   }
-  else {
-    app = motley(__dirname);
-    cwd || (cwd = process.cwd());
-  }
+  cwd || (cwd = process.cwd());
 
   app.boot = function () {
-    app.roots.forEach(function (root) {
+    var roots = app.roots;
+    var last = roots[roots.length - 1];
+    if (last.conf.minimal) roots = [last];
+    roots.forEach(function (root, idx) {
       Object.keys(root).forEach(app.require);
     });
     if (app.router) {
@@ -43,7 +45,7 @@ function motley (cwd) {
     }
     if (app.server && (app.conf.port || app.conf.port === 0)) {
       app.server.listen(app.conf.port, function () {
-        console.log('listening on port', app.server.address().port);
+        console.log('server running at http://localhost:' + app.server.address().port + '/');
       });
     }
   };
