@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "marked": "~0.2.9",
-    "modeler": "~0.4.3"
+    "modeler": "^0.4.7"
   }
 }

@@ -19,8 +19,14 @@ function motley (cwd, app) {
     var roots = app.roots;
     var last = roots[roots.length - 1];
     if (last.conf.minimal) roots = [last];
-    roots.forEach(function (root, idx) {
-      Object.keys(root).forEach(app.require);
+    var plugins = roots.reduce(function (prev, root) {
+      Object.keys(root).forEach(function (k) {
+        if (!~prev.indexOf(k)) prev.push(k);
+      });
+      return prev;
+    }, []);
+    plugins.forEach(function (plugin) {
+      app.require(plugin);
     });
     if (app.router) {
       ['middleware', 'controllers', 'afterware'].forEach(function (type) {
@@ -84,10 +90,11 @@ function motley (cwd, app) {
         else {
           app[name] = plugin;
         }
-        return;
+        return app[name];
       }
     }
     if (name !== 'conf') throw new Error('plugin `' + name + '` not found');
+    return app.conf;
   };
 
   function loadRoot (motleyFile) {

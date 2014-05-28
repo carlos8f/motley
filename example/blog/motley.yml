@@ -1,5 +1,6 @@
 collections: "collections/*.js"
 controllers: "controllers/*.js"
+plugins: "plugins/*.js"
 public: "public/**/*"
 views: "views/**/*.hbs"
 port: 3000
