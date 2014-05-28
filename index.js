@@ -120,8 +120,7 @@ function motley (cwd) {
             base = root[type];
           }
           if (typeof base[name] === 'undefined') base[name] = {};
-          if (file.constructor === Object) base[k] = merge(base[name], file);
-          else base[name] = file;
+          base[name] = file;
         });
       });
     });
