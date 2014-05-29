@@ -7,12 +7,10 @@
   "dependencies": {
     "buffet": "^1.0.0",
     "commander": "^2.2.0",
-    "dish": "^1.0.4",
     "expres": "0.0.4",
     "formidable": "^1.0.14",
     "glob": "^3.2.11",
     "href": "^0.1.1",
-    "idgen": "^2.0.2",
     "js-yaml": "^3.0.2",
     "level": "^0.18.0",
     "middler": "^0.7.1",
