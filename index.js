@@ -67,29 +67,29 @@ function motley (cwd, app) {
     for (var idx = roots.length - 1; idx >= 0; idx--) {
       var root = roots[idx];
       if (typeof root[name] !== 'undefined') {
-        var plugin = root[name];
+        var pluginExports = root[name];
         if (name === 'conf') {
           // merge certain arrays in the conf
-          Object.keys(plugin).forEach(function (k) {
+          Object.keys(pluginExports).forEach(function (k) {
             if (k.match(/^plugins|collections|afterware|middleware|controllers|views|public$/)) {
               if (!app.conf[k]) app.conf[k] = [];
-              var pattern = plugin[k];
-              if (!Array.isArray(pattern)) pattern = [pattern];
-              app.conf[k] = app.conf[k].concat(pattern.map(function (pattern) {
-                return path.join(root.dir, pattern);
-              }));
+              var spec = {
+                cwd: root.dir,
+                globs: Array.isArray(pluginExports[k]) ? pluginExports[k] : [pluginExports[k]]
+              };
+              app.conf[k].push(spec);
             }
-            else app.conf[k] = plugin[k];
+            else app.conf[k] = pluginExports[k];
           });
           continue;
         }
-        else if (typeof plugin === 'function') {
-          var bound = plugin.call(null, app);
-          bound.weight = bound.weight || plugin.weight;
+        else if (typeof pluginExports === 'function') {
+          var bound = pluginExports.call(null, app);
+          bound.weight = bound.weight || pluginExports.weight;
           app[name] = bound;
         }
         else {
-          app[name] = plugin;
+          app[name] = pluginExports;
         }
         return app[name];
       }
