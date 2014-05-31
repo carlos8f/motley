@@ -5,7 +5,6 @@ module.exports = function (app) {
   if (app.conf.public && app.conf.public.length) {
     var controller = app.controller();
     app.conf.public.forEach(function (spec) {
-      console.log(spec);
       var options = {cwd: spec.cwd};
       if (app.conf.static) {
         Object.keys(app.conf.static).forEach(function (k) {

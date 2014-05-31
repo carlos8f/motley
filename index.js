@@ -109,7 +109,7 @@ function motley (cwd, app) {
           var str = fs.readFileSync(motleyFile, {encoding: 'utf8'});
           return yaml.safeLoad(str);
         }
-        else throw new Error('motleyFile must have extension .js, .json, or .yml');
+        else throw new Error('motleyFile must have extension .js, .json, .yml, or .yaml');
       })()
     };
     ['plugins', 'collections', 'afterware', 'middleware', 'controllers'].forEach(function (type) {
