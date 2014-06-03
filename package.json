@@ -18,7 +18,8 @@
     "pause": "0.0.1",
     "qs": "^0.6.6",
     "sess": "^0.1.4",
-    "templ": "^1.0.0"
+    "templ": "^1.0.0",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "mocha": "*",

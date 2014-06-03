@@ -1,19 +1,34 @@
-var path = require('path')
-  , glob = require('glob')
-  , fs = require('fs')
-  , yaml = require('js-yaml')
-  , middler = require('middler')
+var Mayonnaise = require('mayonnaise').Mayonnaise
   , EventEmitter = require('events').EventEmitter
+  , path = require('path')
+  , inherits = require('util').inherits
 
-function motley (cwd, app) {
-  if (!app) {
-    if (cwd === __dirname) {
-      app = new EventEmitter;
-      app.setMaxListeners(0);
+function Motley (motleyFile, cwd) {
+  EventEmitter.call(this);
+  var self = this;
+  this.setMaxListeners(0);
+  this.components = ['afterware', 'collections', 'controllers', 'middleware', 'plugins', 'public', 'views'];
+  this.conf = {};
+  this.ready = false;
+  this._conf = require('./plugins/conf')(this)(motleyFile, cwd);
+  this._conf.on('all', function (op, file) {
+    if (op.match(/^add|update|cleanup$/)) {
+      self.conf = this.getMerged();
     }
-    else app = motley(__dirname);
-  }
-  cwd || (cwd = process.cwd());
+  });
+  this._conf.on('ready', function () {
+    console.log('ready conf', self.conf);
+  });
+}
+inherits(Motley, EventEmitter);
+
+module.exports = function (motleyFile, cwd) {
+  return new Motley(motleyFile, cwd);
+};
+module.exports.Motley = Motley;
+
+/*
+Motley.prototype.
 
   app.boot = function () {
     var roots = app.roots;
@@ -142,5 +157,4 @@ function motley (cwd, app) {
 
   return app;
 }
-
-module.exports = motley;
+*/

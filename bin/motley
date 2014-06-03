@@ -1,30 +1,12 @@
 #!/usr/bin/env node
 var cmd = require('commander')
   , motley = require('../')
-  , child_process = require('child_process')
-  , assert = require('assert')
-  , path = require('path')
-  , fs = require('fs')
 
 cmd
+  .usage('motley [motley.yml]')
   .version(require('../package.json').version)
+  .option('-d, --cwd', 'motley project directory')
   .description('run a motley project')
 
 cmd.parse(process.argv);
-var cwd = cmd.args[0] || process.cwd();
-
-fs.stat(cwd, function (err, stat) {
-  assert.ifError(err);
-  if (stat.isFile()) {
-    cwd = path.dirname(cwd);
-  }
-  fs.exists(path.join(cwd, 'package.json'), function (exists) {
-    if (exists) {
-      child_process.exec('npm install', {cwd: cwd}, function (err, stderr) {
-        assert.ifError(err);
-        motley(cwd).boot();
-      });
-    }
-    else motley(cwd).boot();
-  });
-});
+motley((cmd.args[0] || '').replace(/\/$/, ''), cmd.cwd);
