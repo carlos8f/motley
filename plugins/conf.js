@@ -2,11 +2,21 @@ var Mayonnaise = require('mayonnaise').Mayonnaise
   , inherits = require('util').inherits
   , yaml = require('js-yaml')
   , path = require('path')
-  , _ = require('underscore')
+  , merge = require('merge')
 
 module.exports = function (app) {
   function Conf (specs) {
     Mayonnaise.call(this, specs);
+    this.on('all', function (op, file) {
+      if (op.match(/^add|update|cleanup$/)) {
+        app.conf = this.getMerged();
+      }
+    });
+    this.on('ready', function () {
+      specs.forEach(function (spec) {
+        
+      });
+    });
   }
   inherits(Conf, Mayonnaise);
 
@@ -20,19 +30,6 @@ module.exports = function (app) {
     else if (file.name.match(/\.json$/)) return require(file.fullPath);
   };
   Conf.prototype.getMerged = function () {
-    function merge (a, b) {
-      console.error(a.fullPath, b.fullPath);
-      var ret = _.extend(a, b);
-      function ensureArray (o) {
-        if (!o) return [];
-        if (Array.isArray(o)) return o;
-        return [o];
-      }
-      app.components.forEach(function (k) {
-        ret[k] = _.union(ensureArray(a[k]), ensureArray(b[k]));
-      });
-      return ret;
-    }
     return this.getPlugin('motley', {merge: merge});
   };
 

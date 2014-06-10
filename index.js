@@ -11,14 +11,6 @@ function Motley (motleyFile, cwd) {
   this.conf = {};
   this.ready = false;
   this._conf = require('./plugins/conf')(this)(motleyFile, cwd);
-  this._conf.on('all', function (op, file) {
-    if (op.match(/^add|update|cleanup$/)) {
-      self.conf = this.getMerged();
-    }
-  });
-  this._conf.on('ready', function () {
-    console.log('ready conf', self.conf);
-  });
 }
 inherits(Motley, EventEmitter);
 
