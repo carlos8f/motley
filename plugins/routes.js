@@ -22,6 +22,7 @@ module.exports = function (app) {
           self.levels[file.weight].add(weight, handler);
         }
       });
+      app.emit('routes');
     });
   }
   inherits(Routes, app.plugins.Plugins);
