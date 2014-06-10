@@ -20,7 +20,8 @@ module.exports = function (app) {
   Plugins.prototype.makePluginPath = function (file) {
     return file.key
       .replace(/\.[^\.]+$/, '')
-      .replace(/_(afterware|middleware|controller|collection|plugin)$/, '');
+      .replace(/_(afterware|middleware|controller|collection|plugin)$/, '')
+      .replace(/^\//, '');
   };
 
   Plugins.prototype.compile = function (file) {

@@ -18,7 +18,7 @@ module.exports = function (app) {
     if (file.name.match(/\.ya?ml$/)) return yaml.safeLoad(file.data({encoding: 'utf8'}));
   };
   Conf.prototype.get = function () {
-    return this.getPlugin('motley', {merge: merge});
+    return this.getPlugin('/motley', {merge: merge});
   };
 
   var fn = function (motleyFile, cwd) {
