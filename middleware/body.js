@@ -1,8 +1,8 @@
 var formidable = require('formidable');
 
 module.exports = function (app) {
-  if (req.body || req.files) return next();
   return function (req, res, next) {
+    if (req.body || req.files) return next();
     if (typeof req.unpause === 'undefined') return next(new Error('body requires pause'));
     var form = new formidable.IncomingForm();
     try {
