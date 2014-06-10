@@ -2,7 +2,6 @@
   "name": "motley-example-blog",
   "version": "0.0.0",
   "description": "example using motley",
-  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "marked": "~0.2.9",
-    "modeler": "~0.4.3"
+    "modeler": "^0.4.7"
   }
 }

@@ -1,28 +1,39 @@
-var app = require('../');
+var Mayonnaise = require('mayonnaise').Mayonnaise
+  , inherits = require('util').inherits
+  , yaml = require('js-yaml')
+  , path = require('path')
+  , merge = require('merge')
 
-if (!app.loadConf) {
-  var safer = require('safer')
-    , yaml = require('js-yaml')
+module.exports = function (app) {
+  function Conf (specs) {
+    Mayonnaise.call(this, specs);
+    var self = this;
+    app.once('close', function () {
+      self.close();
+    });
+  }
+  inherits(Conf, Mayonnaise);
 
-  app.loadConf = function (cb) {
-    try { var conf = require(app.root + '/conf.yml'); }
-    catch (e) {
-      try { var conf = require(app.root + '/conf.json'); }
-      catch (e) { var conf = {}; }
-    }
-
-    // prompt for a passphrase
-    if (conf.prompt || ~process.argv.indexOf('-p')) {
-      safer.prompt(app.root + '/conf.safe', function (err, safe) {
-        if (err) return cb(err);
-
-        Object.keys(safe).forEach(function (k) {
-          conf[k] = safe[k];
-        });
-
-        cb(null, conf);
-      });
-    }
-    else cb(null, conf);
+  Conf.prototype.compile = function (file) {
+    if (file.name.match(/\.ya?ml$/)) return yaml.safeLoad(file.data({encoding: 'utf8'}));
   };
-}
+  Conf.prototype.get = function () {
+    return this.getPlugin('/motley', {merge: merge});
+  };
+
+  var fn = function (motleyFile, cwd) {
+    var specs = [
+      {
+        cwd: path.resolve(__dirname, '../'),
+        globs: ['motley.yml']
+      },
+      {
+        cwd: cwd,
+        globs: [motleyFile]
+      }
+    ];
+    return new Conf(specs);
+  };
+  fn.Conf = Conf;
+  return fn;
+};

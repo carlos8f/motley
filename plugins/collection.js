@@ -1,12 +1,10 @@
-var app = require('../');
+var modeler = require('modeler-leveldb');
 
-if (!app.collection) {
-  var modeler = require('modeler-redis');
-  require('./redis');
-  app.collection = function (_opts) {
+module.exports = function (app) {
+  app.require('db');
+  return function (_opts) {
     _opts || (_opts = {});
-    _opts.client = app.redis;
-    _opts.prefix || (_opts.prefix = app.pkg.name + ':');
+    _opts.db = app.db;
     return modeler(_opts);
   };
-}
+};

@@ -1,9 +1,7 @@
-var app = require('../')
-  , existsSync = require('fs').existsSync
-
-var conf = app.conf.static || {root: app.root + '/public'};
-require('../plugins/buffet');
-
-if (!existsSync(conf.root)) conf.root = '.';
-module.exports = app.buffet(conf);
+module.exports = function (app) {
+  if (app.public) {
+    return app.public().middleware(app.conf.static);
+  }
+  else return function (req, res, next) { next(); }
+};
 module.exports.weight = -1000;

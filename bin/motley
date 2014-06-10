@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+var cmd = require('commander')
+  , motley = require('../')
+  , fs = require('fs')
+  , path = require('path')
+
+cmd
+  .usage('motley [motley.yml]')
+  .version(require('../package.json').version)
+  .option('-d, --cwd', 'motley project directory')
+  .description('run a motley project')
+
+cmd.parse(process.argv);
+
+var motleyFile = (cmd.args[0] || '').replace(/\/$/, '')
+  , cwd = cmd.cwd
+
+if (!motleyFile) motleyFile = '.';
+
+var stat = fs.statSync(motleyFile);
+if (stat.isDirectory()) {
+  cwd = path.resolve(motleyFile);
+  motleyFile = 'motley.yml';
+}
+else if (stat.isFile()) {
+  cwd = path.resolve(path.dirname(motleyFile));
+  motleyFile = path.basename(motleyFile);
+}
+
+motley(motleyFile, cwd);

@@ -3,31 +3,33 @@
   "version": "0.5.7",
   "description": "an alternative rapid web development framework",
   "main": "index.js",
+  "bin": "./bin/motley",
   "dependencies": {
-    "pause": "0.0.1",
-    "idgen": "~1.3.0",
+    "commander": "^2.2.0",
     "expres": "0.0.4",
-    "middler": "~0.7.0",
-    "formidable": "~1.0.14",
-    "modeler-redis": "~0.3.1",
-    "sess": "~0.1.1",
-    "safer": "~0.1.4",
-    "haredis": "~0.2.14",
-    "request": "~2.22.0",
-    "buffet": "~0.6.0",
-    "templ": "~0.1.5",
-    "js-yaml": "~2.1.0",
-    "glob": "~3.2.3",
-    "dish": "~0.1.2",
-    "href": "~0.1.1",
-    "qs": "~0.6.5"
+    "formidable": "^1.0.14",
+    "href": "^0.1.1",
+    "js-yaml": "^3.0.2",
+    "level": "^0.18.0",
+    "mayonnaise": "git+https://gist.github.com/cd931ba95481a7570602.git",
+    "dollop": "git+https://gist.github.com/30be6b580efaf8d74074.git",
+    "merge": "^1.1.3",
+    "middler": "^0.7.1",
+    "modeler-leveldb": "^0.3.0",
+    "pause": "0.0.1",
+    "qs": "^0.6.6",
+    "sess": "^0.1.4",
+    "templ": "^1.2.0",
+    "underscore": "^1.6.0",
+    "buffet": "^1.0.2"
   },
   "devDependencies": {
     "mocha": "*",
+    "request": "^2.36.0",
     "zombie": "~2.0.0-alpha19"
   },
   "scripts": {
-    "test": "make test"
+    "test": "./node_modules/.bin/mocha --reporter spec --bail --timeout 10s --require test/common.js"
   },
   "repository": {
     "type": "git",

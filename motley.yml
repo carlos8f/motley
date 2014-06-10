@@ -1,0 +1,5 @@
+afterware: "afterware/*.js"
+collections: "collections/*.js"
+middleware: "middleware/*.js"
+plugins: "plugins/*.js"
+public: "assets/*"

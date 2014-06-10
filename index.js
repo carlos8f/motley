@@ -1,45 +1,28 @@
-var basename = require('path').basename;
+var Mayonnaise = require('mayonnaise').Mayonnaise
+  , EventEmitter = require('events').EventEmitter
+  , path = require('path')
+  , inherits = require('util').inherits
 
-var app = module.exports = new (require('events').EventEmitter);
-app.setMaxListeners(0);
-
-// boot the pkginfo and conf
-app.boot = function (cb) {
-  if (!app.root) app.root = process.cwd();
-  app.core = __dirname;
-  try {
-    app.pkg = require(app.root + '/package.json');
-  }
-  catch (e) {
-    app.pkg = {
-      name: 'untitled',
-      version: '0.0.0',
-      description: 'a motley app'
-    };
-  }
-  require('./plugins/conf');
-  app.loadConf(function (err, conf) {
-    if (err) return cb(err);
-    app.conf = conf;
-    cb();
+function Motley (motleyFile, cwd) {
+  EventEmitter.call(this);
+  var app = this;
+  this.setMaxListeners(0);
+  this.ready = false;
+  this.dir = cwd;
+  this._conf = require('./plugins/conf')(this)(motleyFile, cwd);
+  this._conf.on('ready', function (files) {
+    app.conf = this.get();
+    var plugins = require('./plugins/plugins')(app)();
+    app.require = plugins.require.bind(plugins);
   });
+}
+inherits(Motley, EventEmitter);
+
+Motley.prototype.close = function (code) {
+  this.emit('close');
 };
 
-// the band of merry middleware
-app.motley = function () {
-  // load plugins
-  require('./plugins/load');
-  app.load(app.core + '/plugins');
-  app.load(app.root + '/plugins');
-
-  // mount middleware and controllers
-  app.vhost('*', app.core + '/middleware');
-  app.vhost('*', app.root + '/middleware');
-  app.vhost('*', app.root + '/controllers');
-
-  // generic favicon
-  app.router.get(500, '/favicon.ico', app.favicon());
-
-  // generic 404 handler
-  app.router.add(10000, app.handle404);
+module.exports = function (motleyFile, cwd) {
+  return new Motley(motleyFile, cwd);
 };
+module.exports.Motley = Motley;

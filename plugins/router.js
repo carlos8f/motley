@@ -1,8 +1,6 @@
-var app = require('../');
+var middler = require('middler');
 
-if (!app.router) {
-  require('./server');
-  require('./controller');
-
-  app.router = app.controller().attach(app.server);
-}
+module.exports = function (app) {
+  app.require('server');
+  return middler(app.server);
+};

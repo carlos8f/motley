@@ -1,7 +1,8 @@
 describe('hello world example', function () {
   var proc;
   before(function (done) {
-    proc = spawn('node', ['server.js'], {cwd: examples + '/hello-world'});
+    var binPath = path.resolve(__dirname, '../bin/motley');
+    proc = spawn(binPath, [], {cwd: examples + '/hello-world'});
     process.on('exit', function () {
       proc.kill();
     });
@@ -24,6 +25,7 @@ describe('hello world example', function () {
         '  <meta charset="utf-8">\n' +
         '  <title></title>\n' +
         '  <link rel="stylesheet" href="/css/style.css">\n' +
+        '  <link rel="icon" type="image/png" href="/motley.png">\n' +
         '</head>\n' +
         '<body>\n' +
         '  Hello World!\n' +
@@ -46,8 +48,8 @@ describe('hello world example', function () {
       done();
     });
   });
-  it('GET /favicon.ico', function (done) {
-    request({uri: 'http://localhost:3000/favicon.ico', encoding: 'base64'}, function (err, resp, body) {
+  it('GET /motley.ico', function (done) {
+    request({uri: 'http://localhost:3000/motley.ico', encoding: 'base64'}, function (err, resp, body) {
       assert.ifError(err);
       assert.equal(resp.statusCode, 200);
       assert(resp.headers['content-type'].match(/image\/x\-icon/));

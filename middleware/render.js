@@ -1,6 +1,7 @@
-var app = require('../')
-  , existsSync = require('fs').existsSync
-
-require('../plugins/templ');
-module.exports = app.templ(app.conf.render);
+module.exports = function (app) {
+  if (app.views) {
+    return app.views().middleware(app.conf.render);
+  }
+  else return function (req, res, next) { next(); }
+};
 module.exports.weight = -1000;
