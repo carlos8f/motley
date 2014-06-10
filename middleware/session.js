@@ -5,6 +5,7 @@ module.exports = function (app) {
   conf.cookie || (conf.cookie = {});
   if (typeof conf.cookie.maxAge === 'undefined') conf.cookie.maxAge = 86400 * 365;
   conf.key || (conf.key = app.pkg.name);
+  app.require('sessions');
   conf.sessions = app.sessions;
   return sess(conf);
 };

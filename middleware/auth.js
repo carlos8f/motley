@@ -1,4 +1,5 @@
 module.exports = function (app) {
+  app.require('users');
   return function (req, res, next) {
     if (!req.session) return next(new Error('auth requires session'));
     req.login = function (user) {

@@ -6,6 +6,7 @@ function requireAuth (req, res, next) {
 }
 
 module.exports = function (app) {
+  app.require('posts');
   return app.controller()
     .get('/', function (req, res, next) {
       var posts = [];
