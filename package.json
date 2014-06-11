@@ -25,7 +25,7 @@
   "devDependencies": {
     "mocha": "*",
     "request": "^2.36.0",
-    "zombie": "~2.0.0-alpha19"
+    "zombie": "^2.0.0-alpha31"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --bail --timeout 10s --require test/common.js"

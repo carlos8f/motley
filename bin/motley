@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 var cmd = require('commander')
   , motley = require('../')
+  , assert = require('assert')
   , fs = require('fs')
   , path = require('path')
+  , exec = require('child_process').exec
 
 cmd
   .usage('motley [motley.yml]')
   .version(require('../package.json').version)
   .option('-d, --cwd', 'motley project directory')
+  .option('--no-install', 'do not install dependencies automatically')
   .description('run a motley project')
 
 cmd.parse(process.argv);
@@ -27,4 +30,10 @@ else if (stat.isFile()) {
   motleyFile = path.basename(motleyFile);
 }
 
-motley(motleyFile, cwd);
+if (cmd.install) {
+  exec('npm install', {cwd: cwd}, function (err, stdout, stderr) {
+    assert.ifError(err);
+    motley(motleyFile, cwd);
+  });
+}
+else motley(motleyFile, cwd);
