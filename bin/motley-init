@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+var cmd = require('commander')
+  , motley = require('../')
+  , assert = require('assert')
+  , fs = require('fs')
+  , path = require('path')
+  , ncp = require('ncp')
+  , idgen = require('idgen')
+
+cmd
+  .usage('motley-init [path/to/project]')
+  .version(require('../package.json').version)
+  .option('--gist', 'initialize a new gist-friendly motley project')
+  .description('initialize a new motley project')
+
+cmd.parse(process.argv);
+
+var motleyFile = (cmd.args[0] || '').replace(/\/$/, '');
+
+if (!motleyFile) motleyFile = '.';
+
+try {
+  var stat = fs.statSync(motleyFile);
+  if (stat.isDirectory()) {
+    cwd = path.resolve(motleyFile);
+  }
+  else if (stat.isFile()) {
+    cwd = path.resolve(path.dirname(motleyFile));
+  }
+}
+catch (e) {
+  cwd = process.cwd();
+}
+
+var parts = [__dirname, '..', 'example', 'init'];
+if (cmd.gist) parts[3] += '-gist';
+var src = path.resolve.apply(path, parts);
+ncp(src, cwd, {stopOnErr: true}, function (err) {
+  assert.ifError(err);
+  var id = idgen();
+  fs.readFile(path.join(cwd, 'motley.yml'), {encoding: 'utf8'}, function (err, data) {
+    assert.ifError(err);
+    data = 'id: ' + id + '\n' + data;
+    fs.writeFile(path.join(cwd, 'motley.yml'), data, assert.ifError);
+  });
+});

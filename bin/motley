@@ -7,7 +7,7 @@ var cmd = require('commander')
   , exec = require('child_process').exec
 
 cmd
-  .usage('motley [motley.yml]')
+  .usage('motley [path/to/project]')
   .version(require('../package.json').version)
   .option('-d, --cwd', 'motley project directory')
   .option('--no-install', 'do not install dependencies automatically')
