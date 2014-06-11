@@ -1,3 +1,4 @@
+afterware: "*_afterware.js"
 collections: "*_collection.js"
 controllers: "*_controller.js"
 middleware: "*_middleware.js"
