@@ -2,7 +2,7 @@ describe('blog example', function () {
   var proc, browser = new (require('zombie'));
   var binPath = path.resolve(__dirname, '../bin/motley');
   before(function (done) {
-    proc = spawn(binPath, [], {cwd: examples + '/blog'});
+    proc = spawn(binPath, ['--install'], {cwd: examples + '/blog'});
     process.on('exit', function () {
       proc.kill();
     });

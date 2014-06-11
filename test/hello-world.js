@@ -2,7 +2,7 @@ describe('hello world example', function () {
   var proc;
   before(function (done) {
     var binPath = path.resolve(__dirname, '../bin/motley');
-    proc = spawn(binPath, [], {cwd: examples + '/hello-world'});
+    proc = spawn(binPath, ['--install'], {cwd: examples + '/hello-world'});
     process.on('exit', function () {
       proc.kill();
     });

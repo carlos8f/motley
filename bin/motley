@@ -10,7 +10,7 @@ cmd
   .usage('motley [path/to/project]')
   .version(require('../package.json').version)
   .option('-d, --cwd', 'motley project directory')
-  .option('--no-install', 'do not install dependencies automatically')
+  .option('--install', 'install dependencies automatically')
   .description('run a motley project')
 
 cmd.parse(process.argv);
