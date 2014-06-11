@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 var cmd = require('commander')
-  , motley = require('../')
   , assert = require('assert')
   , fs = require('fs')
   , path = require('path')
@@ -18,7 +17,7 @@ cmd.parse(process.argv);
 var dest = cmd.args[0] || '.';
 
 var parts = [__dirname, '..', 'init'];
-if (cmd.gist) parts[3] += '-gist';
+if (cmd.gist) parts[2] += '-gist';
 var src = path.resolve.apply(path, parts);
 ncp(src, dest, {clobber: false, stopOnErr: true}, function (err) {
   assert.ifError(err);
