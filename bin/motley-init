@@ -5,26 +5,82 @@ var cmd = require('commander')
   , path = require('path')
   , ncp = require('ncp')
   , idgen = require('idgen')
+  , spawn = require('child_process').spawn
+  , rimraf = require('rimraf')
+  , mkdirp = require('mkdirp')
 
 cmd
   .usage('motley-init [path/to/project]')
   .version(require('../package.json').version)
-  .option('--gist', 'initialize a new gist-friendly motley project')
+  .option('--gist', 'initialize a new motley gist')
+  .option('--public', 'do not make a secret gist')
+  .option('--open', 'open the new gist in browser')
   .description('initialize a new motley project')
 
 cmd.parse(process.argv);
 
-var dest = cmd.args[0] || '.';
+var dest = path.resolve(cmd.args[0] || '.');
+var name = path.basename(dest);
+var src;
 
 var parts = [__dirname, '..', 'init'];
-if (cmd.gist) parts[2] += '-gist';
-var src = path.resolve.apply(path, parts);
-ncp(src, dest, {clobber: false, stopOnErr: true}, function (err) {
-  assert.ifError(err);
-  var id = idgen();
-  fs.readFile(path.join(dest, 'motley.yml'), {encoding: 'utf8'}, function (err, data) {
+if (cmd.gist) {
+  var tmp = path.join(require('os').tmpDir(), 'motley-tmp-' + idgen());
+  parts[2] += '-gist';
+  src = path.resolve.apply(path, parts);
+  var bin = path.join(__dirname, '..', 'node_modules', '.bin', 'gist');
+  var args = [];
+  args.push(cmd.public ? '--no-private' : '--private');
+  args.push('--description', name);
+  args.push(cmd.open ? '--open' : '--no-open');
+  fs.readdir(src, function (err, files) {
     assert.ifError(err);
-    data = 'id: ' + id + '\n' + data;
-    fs.writeFile(path.join(dest, 'motley.yml'), data, assert.ifError);
+    args = args.concat(files);
+    var id;
+    var gist = spawn(bin, args, {cwd: src, stdio: 'pipe'})
+      .once('exit', function (code) {
+        assert.equal(code, 0);
+        spawn('git', ['clone', 'git@gist.github.com:/' + id + '.git', tmp], {stdio: 'pipe'})
+          .once('exit', function (code) {
+            assert.equal(code, 0);
+            src = tmp;
+            copy();
+          });
+      })
+      .stdout.on('data', function (data) {
+        var match = data.toString().match(/https:\/\/gist\.github\.com\/([^\/]+)\/([0-9a-f]+)/);
+        if (match) {
+          id = match[2];
+        }
+      });
   });
-});
+}
+else {
+  src = path.resolve.apply(path, parts);
+  copy();
+}
+
+function copy () {
+  mkdirp(dest, function (err) {
+    assert.ifError(err);
+    ncp(src, dest, {clobber: false, stopOnErr: true}, function (err) {
+      assert.ifError(err);
+      if (cmd.gist) {
+        // delete the tmp files
+        rimraf(tmp, function (err) {
+          assert.ifError(err);
+          addId();
+        });
+      }
+      else addId();
+      function addId () {
+        var id = idgen();
+        fs.readFile(path.join(dest, 'motley.yml'), {encoding: 'utf8'}, function (err, data) {
+          assert.ifError(err);
+          data = 'id: ' + id + '\n' + data;
+          fs.writeFile(path.join(dest, 'motley.yml'), data, assert.ifError);
+        });
+      }
+    });
+  });
+}

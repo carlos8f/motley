@@ -25,7 +25,9 @@
     "pause": "0.0.1",
     "qs": "^0.6.6",
     "sess": "^0.1.4",
-    "templ": "^1.2.0"
+    "templ": "^1.2.0",
+    "gist-cli": "^0.2.0",
+    "rimraf": "^2.2.8"
   },
   "devDependencies": {
     "marked": "^0.3.2",
