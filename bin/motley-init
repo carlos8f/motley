@@ -6,6 +6,7 @@ var cmd = require('commander')
   , ncp = require('ncp')
   , idgen = require('idgen')
   , spawn = require('child_process').spawn
+  , gist = require('gist-cli')
   , rimraf = require('rimraf')
   , mkdirp = require('mkdirp')
 
@@ -28,7 +29,6 @@ if (cmd.gist) {
   var tmp = path.join(require('os').tmpDir(), 'motley-tmp-' + idgen());
   parts[2] += '-gist';
   src = path.resolve.apply(path, parts);
-  var bin = path.join(__dirname, '..', 'node_modules', '.bin', 'gist');
   var args = [];
   args.push(cmd.public ? '--no-private' : '--private');
   args.push('--description', name);
@@ -36,23 +36,21 @@ if (cmd.gist) {
   fs.readdir(src, function (err, files) {
     assert.ifError(err);
     args = args.concat(files);
-    var id;
-    var gist = spawn(bin, args, {cwd: src, stdio: 'pipe'})
-      .once('exit', function (code) {
-        assert.equal(code, 0);
-        spawn('git', ['clone', 'git@gist.github.com:/' + id + '.git', tmp], {stdio: 'pipe'})
-          .once('exit', function (code) {
-            assert.equal(code, 0);
-            src = tmp;
-            copy();
-          });
-      })
-      .stdout.on('data', function (data) {
-        var match = data.toString().match(/https:\/\/gist\.github\.com\/([^\/]+)\/([0-9a-f]+)/);
-        if (match) {
-          id = match[2];
-        }
-      });
+    // the chdir is so gist-cli doesn't take absolute paths and create really
+    // long "dashy" gist filenames from them.
+    var oldcwd = process.cwd();
+    process.chdir(src);
+    gist(args, function (err, u) {
+      process.chdir(oldcwd);
+      assert.ifError(err);
+      var id = u.match(/https:\/\/gist\.github\.com\/([^\/]+)\/([0-9a-f]+)/)[2];
+      var git = spawn('git', ['clone', '--quiet', 'git@gist.github.com:/' + id + '.git', tmp])
+        .once('exit', function (code) {
+          assert.equal(code, 0);
+          src = tmp;
+          copy();
+        });
+    });
   });
 }
 else {
