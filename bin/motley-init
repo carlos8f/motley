@@ -15,32 +15,17 @@ cmd
 
 cmd.parse(process.argv);
 
-var motleyFile = (cmd.args[0] || '').replace(/\/$/, '');
+var dest = cmd.args[0] || '.';
 
-if (!motleyFile) motleyFile = '.';
-
-try {
-  var stat = fs.statSync(motleyFile);
-  if (stat.isDirectory()) {
-    cwd = path.resolve(motleyFile);
-  }
-  else if (stat.isFile()) {
-    cwd = path.resolve(path.dirname(motleyFile));
-  }
-}
-catch (e) {
-  cwd = process.cwd();
-}
-
-var parts = [__dirname, '..', 'example', 'init'];
+var parts = [__dirname, '..', 'init'];
 if (cmd.gist) parts[3] += '-gist';
 var src = path.resolve.apply(path, parts);
-ncp(src, cwd, {stopOnErr: true}, function (err) {
+ncp(src, dest, {clobber: false, stopOnErr: true}, function (err) {
   assert.ifError(err);
   var id = idgen();
-  fs.readFile(path.join(cwd, 'motley.yml'), {encoding: 'utf8'}, function (err, data) {
+  fs.readFile(path.join(dest, 'motley.yml'), {encoding: 'utf8'}, function (err, data) {
     assert.ifError(err);
     data = 'id: ' + id + '\n' + data;
-    fs.writeFile(path.join(cwd, 'motley.yml'), data, assert.ifError);
+    fs.writeFile(path.join(dest, 'motley.yml'), data, assert.ifError);
   });
 });

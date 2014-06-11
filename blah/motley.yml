@@ -1,0 +1,9 @@
+id: wtY3P951YDrvycq3
+collections: "collections/*.js"
+controllers: "controllers/*.js"
+middleware: "middleware/*.js"
+plugins: "plugins/*.js"
+public: "public/**/*"
+views: "views/**/*.hbs"
+port: 3000
+title: new motley site
