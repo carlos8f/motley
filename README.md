@@ -31,8 +31,8 @@ just two shell commands.
 ## Famous two-line bootstrap
 
 ```
-$ motley-init hello-world
-$ motley hello-world
+$ motley-init my-project
+$ motley my-project
 server running at http://localhost:3000/
 ```
 
@@ -41,7 +41,7 @@ server running at http://localhost:3000/
 ## One-line gist creation
 
 ```
-$ motley-init --gist [--public] [--open] [dir]
+$ motley-init --gist [--public] [--open] [my-project]
 ```
 
 This will:
