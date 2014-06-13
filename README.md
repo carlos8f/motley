@@ -51,6 +51,15 @@ Then you have a brand new fully functioning web app, runnable with the `motley` 
 
 Simply run `motley` in the project directory, the web server will start, and edit the source code to do what you want!
 
+## Examples
+
+[Example apps](https://github.com/carlos8f/motley/tree/master/example) using Motley:
+
+- [the &ldquo;hello world&rdquo; app](https://github.com/carlos8f/motley/tree/master/example/hello-world)
+- [simple blog with in-memory database](https://github.com/carlos8f/motley/tree/master/example/blog)
+- [simple blog with LevelDB database, as a gist](https://github.com/carlos8f/motley/tree/master/example/gist-blog)
+- [a mini app](https://github.com/carlos8f/motley/tree/master/example/minimal)
+
 ### Developed by [Terra Eclipse](http://www.terraeclipse.com)
 Terra Eclipse, Inc. is a nationally recognized political technology and
 strategy firm located in Aptos, CA and Washington, D.C.
