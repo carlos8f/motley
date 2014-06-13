@@ -49,12 +49,6 @@ This will:
 
 Then you have a brand new fully functioning web app, runnable with the `motley` binary, tied to a new git repo, backed by [gist.github.com](https://gist.github.com/), and all you had to do was type `motley-init`!
 
-## Scaffolding
-
-The one-line gist command above will generate the following motley project as a gist:
-
-{% gist carlos8f/e85299372c42ea5df985 %}
-
 Simply run `motley` in the project directory, the web server will start, and edit the source code to do what you want!
 
 ### Developed by [Terra Eclipse](http://www.terraeclipse.com)
