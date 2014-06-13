@@ -1,7 +1,7 @@
 {
   "name": "motley",
   "version": "1.0.1",
-  "description": "an alternative rapid web development framework",
+  "description": "cyberpunking the internets",
   "main": "index.js",
   "bin": {
     "motley": "./bin/motley",
