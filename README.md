@@ -1,15 +1,12 @@
 ![motley](https://raw.github.com/carlos8f/motley/master/assets/motley-full.png)
 
-the impossibly awesome web development framework
-
 [![build status](https://secure.travis-ci.org/carlos8f/motley.png)](http://travis-ci.org/carlos8f/motley)
 
 [![NPM](https://nodei.co/npm/motley.png?downloads=true)](https://nodei.co/npm/motley/)
 
 ## Introduction
 
-Cyberpunking the internets. That's what you should be doing right now, and
-Motley is the <del>fool</del> tool for you, heh heh. It combines the best:
+Cyberpunking the internets. That's what you should be doing right now, and Motley is the <del>fool</del> tool for you, heh heh. It combines the best:
 
 - [LevelDB schemaless models](https://www.npmjs.org/package/modeler-leveldb)
 - [Handlebars views](https://www.npmjs.org/package/templ)
@@ -20,9 +17,7 @@ Motley is the <del>fool</del> tool for you, heh heh. It combines the best:
 - [LevelDB-backed session persistence and authentication](https://github.com/carlos8f/sess)
 - and [auto-loadable application structure](https://gist.github.com/carlos8f/cd931ba95481a7570602)
 
-...with impossibly awesome gist integration, allowing you to do
-lightning-fast prototyping or complete application development, all with
-just two shell commands.
+...with impossibly awesome gist integration, allowing you to do lightning-fast prototyping or complete application development, all with just two shell commands.
 
 ## Installation
 
@@ -31,7 +26,7 @@ just two shell commands.
 ## Famous two-line bootstrap
 
 ```
-$ motley-init my-project
+$ motley-init my-project 
 $ motley my-project
 server running at http://localhost:3000/
 ```
@@ -47,15 +42,20 @@ $ motley-init --gist [--public] [--open] [my-project]
 This will:
 
 - prompt you for your github credentials, which are then exchanged
-  for an [access token](https://www.npmjs.org/package/gist-cli) and cached at
-  `~/.gist-login`
+  for an [access token](https://www.npmjs.org/package/gist-cli) and cached at `~/.gist-login`
 - create a gist containing a new motley project
 - check out the gist's git repo via ssh
 - open your browser and point it to the gist
 
-Then you have a brand new fully functioning web app, runnable with the `motley` binary,
-tied to a new git repo, backed by [gist.github.com](https://gist.github.com/), and
-all you had to do was type `motley-init`!
+Then you have a brand new fully functioning web app, runnable with the `motley` binary, tied to a new git repo, backed by [gist.github.com](https://gist.github.com/), and all you had to do was type `motley-init`!
+
+## Scaffolding
+
+The one-line gist command above will generate the following motley project as a gist:
+
+{% gist carlos8f/e85299372c42ea5df985 %}
+
+Simply run `motley` in the project directory, the web server will start, and edit the source code to do what you want!
 
 ### Developed by [Terra Eclipse](http://www.terraeclipse.com)
 Terra Eclipse, Inc. is a nationally recognized political technology and
