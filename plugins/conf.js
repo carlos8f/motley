@@ -8,11 +8,24 @@ module.exports = function (app) {
   function Conf (specs) {
     Mayonnaise.call(this, specs);
     var self = this;
+    this.once('update', function (file) {
+      app.reboot();
+    });
+    this.once('ready', function (files) {
+      app.conf = this.get();
+      var plugins = require('./plugins')(app)();
+      app.require = plugins.require.bind(plugins);
+    });
     app.once('close', function () {
       self.close();
     });
   }
   inherits(Conf, Mayonnaise);
+
+  Conf.prototype.close = function () {
+    Mayonnaise.prototype.close.call(this);
+    this.removeAllListeners();
+  };
 
   Conf.prototype.compile = function (file) {
     if (file.name.match(/\.ya?ml$/)) return yaml.safeLoad(file.data({encoding: 'utf8'}));

@@ -6,16 +6,29 @@ module.exports = function (app) {
   function Plugins (specs) {
     Mayonnaise.call(this, specs);
     var self = this;
-    this.on('ready', function (files) {
+    this.once('ready', function (files) {
       files.forEach(function (file) {
         self.require(file.pluginPath);
       });
+    });
+    this.on('all', function (op, file) {
+      if (op === 'add' || op === 'update' || op === 'remove') {
+        app.reboot();
+      }
     });
     app.once('close', function () {
       self.close();
     });
   }
   inherits(Plugins, Mayonnaise);
+
+  Plugins.prototype.close = function () {
+    this.files().forEach(function (file) {
+      delete require.cache[file.fullPath];
+    });
+    Mayonnaise.prototype.close.call(this);
+    this.removeAllListeners();
+  };
 
   Plugins.prototype.makePluginPath = function (file) {
     return file.key
@@ -33,6 +46,7 @@ module.exports = function (app) {
     var key = file.pluginPath.replace(/^\//, '');
     if (typeof app[key] === 'undefined') {
       app[key] = file.plugin();
+      app.names.push(key);
     }
     return app[key];
   };

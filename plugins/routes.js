@@ -9,7 +9,7 @@ module.exports = function (app) {
     app.plugins.Plugins.call(this, specs);
     this.levels = [];
     var self = this;
-    this.on('ready', function (files) {
+    this.once('ready', function (files) {
       files.forEach(function (file) {
         if (file.plugin) {
           var plugin = file.plugin();
