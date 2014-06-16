@@ -8,7 +8,7 @@ module.exports = function (app) {
     var self = this;
     this.once('ready', function (files) {
       files.forEach(function (file) {
-        self.require(file.pluginPath);
+        if (file.pluginPath) self.require(file.pluginPath);
       });
     });
     this.on('all', function (op, file) {
@@ -38,14 +38,19 @@ module.exports = function (app) {
   };
 
   Plugins.prototype.compile = function (file) {
-    if (file.name.match(/\.js$/)) return require(file.fullPath).bind(null, app);
+    if (file.name.match(/\.js$/)) {
+      var exp = require(file.fullPath);
+      if (typeof exp === 'function') exp = exp.bind(null, app);
+      return exp;
+    }
   };
   Plugins.prototype.require = function (p) {
     var file = this.getPlugin(p);
     if (typeof file === 'undefined') throw new Error('plugin `' + p + '` not found');
     var key = file.pluginPath.replace(/^\//, '');
     if (typeof app[key] === 'undefined') {
-      app[key] = file.plugin();
+      if (typeof file.plugin === 'function') app[key] = file.plugin();
+      else app[key] = file.plugin;
       app.names.push(key);
     }
     return app[key];
