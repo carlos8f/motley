@@ -25,7 +25,7 @@
     "pause": "0.0.1",
     "qs": "^0.6.6",
     "sess": "^0.1.4",
-    "templ": "^1.2.0",
+    "downer": "git+https://gist.github.com/285c2a59b6cae3a42e61.git",
     "gist-cli": "git+https://github.com/carlos8f/gist-cli.git",
     "rimraf": "^2.2.8"
   },
