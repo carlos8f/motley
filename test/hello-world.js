@@ -1,13 +1,16 @@
 describe('hello world example', function () {
-  var proc;
+  var proc, port;
   before(function (done) {
     var binPath = path.resolve(__dirname, '../bin/motley');
-    proc = spawn(binPath, ['--install'], {cwd: examples + '/hello-world'});
+    proc = spawn(binPath, ['--install', '--port=0'], {cwd: examples + '/hello-world'});
     process.on('exit', function () {
       proc.kill();
     });
     proc.stdout.on('data', function (data) {
-      assert.equal(data.toString(), 'server running at http://localhost:3000/\n');
+      var portMatch = data.toString().match(/server running at http:\/\/localhost:(.*)\/\n/i);
+      assert(portMatch);
+      port = portMatch[1];
+      assert.notEqual(port, '3000');
       done();
     });
   });
@@ -15,7 +18,7 @@ describe('hello world example', function () {
     if (proc) proc.kill();
   });
   it('GET /', function (done) {
-    request('http://localhost:3000/', function (err, resp, body) {
+    request('http://localhost:' + port + '/', function (err, resp, body) {
       assert.ifError(err);
       assert.equal(resp.statusCode, 200);
       assert(resp.headers['content-type'].match(/text\/html/));
@@ -36,7 +39,7 @@ describe('hello world example', function () {
     });
   });
   it('GET /css/style.css', function (done) {
-    request('http://localhost:3000/css/style.css', function (err, resp, body) {
+    request('http://localhost:' + port + '/css/style.css', function (err, resp, body) {
       assert.ifError(err);
       assert.equal(resp.statusCode, 200);
       assert(resp.headers['content-type'].match(/text\/css/));
@@ -49,7 +52,7 @@ describe('hello world example', function () {
     });
   });
   it('GET /motley.ico', function (done) {
-    request({uri: 'http://localhost:3000/motley.ico', encoding: 'base64'}, function (err, resp, body) {
+    request({uri: 'http://localhost:' + port + '/motley.ico', encoding: 'base64'}, function (err, resp, body) {
       assert.ifError(err);
       assert.equal(resp.statusCode, 200);
       assert(resp.headers['content-type'].match(/image\/x\-icon/));
@@ -58,7 +61,7 @@ describe('hello world example', function () {
     });
   });
   it('GET /nothing', function (done) {
-    request({uri: 'http://localhost:3000/nothing'}, function (err, resp, body) {
+    request({uri: 'http://localhost:' + port + '/nothing'}, function (err, resp, body) {
       assert.ifError(err);
       assert.equal(resp.statusCode, 404);
       assert.equal(body, '');
