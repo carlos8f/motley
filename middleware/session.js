@@ -4,7 +4,7 @@ module.exports = function (app) {
   var conf = app.conf.session || {};
   conf.cookie || (conf.cookie = {});
   if (typeof conf.cookie.maxAge === 'undefined') conf.cookie.maxAge = 86400 * 365;
-  conf.key || (conf.key = app.pkg.name);
+  conf.key || (conf.key = app.conf.id);
   app.require('sessions');
   conf.sessions = app.sessions;
   return sess(conf);
