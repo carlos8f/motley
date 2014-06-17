@@ -11,9 +11,12 @@ cmd
   .version(require('../package.json').version)
   .option('-d, --cwd', 'motley project directory')
   .option('--install', 'install dependencies automatically')
+  .option('--port <port>', 'specify listening port')
   .description('run a motley project')
 
 cmd.parse(process.argv);
+
+if (typeof cmd.port !== 'undefined') process.env.MOTLEY_PORT = cmd.port;
 
 var motleyFile = (cmd.args[0] || '').replace(/\/$/, '')
   , cwd = cmd.cwd

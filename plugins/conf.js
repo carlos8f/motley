@@ -13,6 +13,10 @@ module.exports = function (app) {
     });
     this.once('ready', function (files) {
       app.conf = this.get();
+      // special port override
+      if (typeof process.env.MOTLEY_PORT !== 'undefined') {
+        app.conf.port = process.env.MOTLEY_PORT;
+      }
       var plugins = require('./plugins')(app)();
       app.require = plugins.require.bind(plugins);
     });
