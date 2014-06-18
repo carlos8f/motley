@@ -40,7 +40,9 @@ module.exports = function (app) {
   Plugins.prototype.compile = function (file) {
     if (file.name.match(/\.js$/)) {
       var exp = require(file.fullPath);
+      var weight = exp.weight;
       if (typeof exp === 'function') exp = exp.bind(null, app);
+      exp.weight = weight;
       return exp;
     }
   };
