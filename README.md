@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Cyberpunking the internets. That's what you should be doing right now, and the Motley node.js framework makes it easy! Lovingly crafted in an efficient Model-View-Controller sytle, Motley combines the best tools for making websites:
+Cyberpunking the internets. That's what you should be doing right now, and the Motley node.js framework makes it easy! Lovingly crafted in an efficient Model-View-Controller style, Motley combines the best tools for making websites:
 
 - [schemaless, portable data layer](https://www.npmjs.org/package/modeler)
 - [Handlebars views](https://www.npmjs.org/package/templ)
