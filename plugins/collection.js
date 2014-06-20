@@ -5,6 +5,7 @@ module.exports = function (app) {
   return function (_opts) {
     _opts || (_opts = {});
     _opts.db = app.db;
+    _opts.password = app.conf.password;
     return modeler(_opts);
   };
 };

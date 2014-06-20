@@ -12,7 +12,7 @@ module.exports = function (app) {
     dir = path.join(tmpDir, '.motley', app.conf.id);
   }
   if (!dir) dir = path.join(app.dir, 'db');
-  mkdirp.sync(dir);
+  mkdirp.sync(dir, 0700);
 
   var db = level(dir);
   app.once('close', function () {
