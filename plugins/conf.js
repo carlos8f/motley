@@ -3,6 +3,7 @@ var Mayonnaise = require('mayonnaise').Mayonnaise
   , yaml = require('js-yaml')
   , path = require('path')
   , merge = require('merge')
+  , prompt = require('cli-prompt')
 
 module.exports = function (app) {
   function Conf (specs) {
@@ -17,8 +18,17 @@ module.exports = function (app) {
       if (typeof process.env.MOTLEY_PORT !== 'undefined') {
         app.conf.port = process.env.MOTLEY_PORT;
       }
-      var plugins = require('./plugins')(app)();
-      app.require = plugins.require.bind(plugins);
+      function initPlugins () {
+        var plugins = require('./plugins')(app)();
+        app.require = plugins.require.bind(plugins);
+      }
+      if (app.conf.password === true) {
+        prompt.password('Enter password: ', function (password) {
+          app.conf.password = password;
+          initPlugins();
+        });
+      }
+      else initPlugins();
     });
     app.once('close', function () {
       self.close();

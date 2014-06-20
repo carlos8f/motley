@@ -27,7 +27,8 @@
     "sess": "^0.1.4",
     "downer": "git+https://gist.github.com/285c2a59b6cae3a42e61.git",
     "gist-cli": "git+https://github.com/carlos8f/gist-cli.git",
-    "rimraf": "^2.2.8"
+    "rimraf": "^2.2.8",
+    "cli-prompt": "^0.4.1"
   },
   "devDependencies": {
     "marked": "^0.3.2",
