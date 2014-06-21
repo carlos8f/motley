@@ -11,25 +11,24 @@ function Motley (motleyFile, cwd) {
   this.started = false;
   this.ready = false;
   this.dir = cwd;
-  var self = this;
   this._confReader = confReader(this);
   this._conf = this._confReader(motleyFile, cwd);
   this.names = [];
   this.on('routes', function () {
     setImmediate(function () {
-      self.started = true;
-      self.ready = true;
-      self.emit('ready');
+      app.started = true;
+      app.ready = true;
+      app.emit('ready');
     });
   });
   this.on('reboot', function () {
-    self.ready = false;
-    self.close();
-    self.names.forEach(function (name) {
-      delete self[name];
+    app.ready = false;
+    app.close();
+    app.names.forEach(function (name) {
+      delete app[name];
     });
-    self.names = [];
-    self._conf = self._confReader(motleyFile, cwd);
+    app.names = [];
+    app._conf = app._confReader(motleyFile, cwd);
   });
 }
 inherits(Motley, EventEmitter);
