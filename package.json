@@ -13,7 +13,7 @@
     "expres": "0.0.4",
     "formidable": "^1.0.14",
     "href": "^0.1.1",
-    "idgen": "^2.0.2",
+    "idgen": "^2.0.0",
     "js-yaml": "^3.0.2",
     "level": "^0.18.0",
     "mayonnaise": "git+https://gist.github.com/cd931ba95481a7570602.git",
