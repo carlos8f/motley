@@ -1,23 +1,5 @@
 describe('blog example', function () {
-  var proc, browser = new (require('zombie'));
-  var binPath = path.resolve(__dirname, '../bin/motley');
-  var port;
-  before(function (done) {
-    proc = spawn(binPath, ['--install', '--port=0'], {cwd: examples + '/blog'});
-    process.on('exit', function () {
-      proc.kill();
-    });
-    proc.stdout.on('data', function (data) {
-      var portMatch = data.toString().match(/server running at http:\/\/localhost:(.*)\/\n/i);
-      assert(portMatch);
-      port = portMatch[1];
-      assert.notEqual(port, '3000');
-      done();
-    });
-  });
-  after(function () {
-    if (proc) proc.kill();
-  });
+  var browser = new (require('zombie'));
   it('log in', function (done) {
     browser.visit('http://localhost:' + port + '/', function () {
       assert.equal(browser.text('title'), 'motley example');

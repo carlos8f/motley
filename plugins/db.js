@@ -5,7 +5,7 @@ var level = require('level')
 
 module.exports = function (app) {
   var dir = app.conf.db;
-  if (!dir && process.env.HOME && app.conf.id) {
+  if (!process.env.MOTLEY_TEST && !dir && process.env.HOME && app.conf.id) {
     dir = path.join(process.env.HOME, '.motley', app.conf.id);
   }
   if (!dir && tmpDir && app.conf.id) {

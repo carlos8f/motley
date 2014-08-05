@@ -4,7 +4,7 @@ var cmd = require('commander')
   , assert = require('assert')
   , fs = require('fs')
   , path = require('path')
-  , exec = require('child_process').exec
+  , child_process = require('child_process')
 
 cmd
   .usage('motley [path/to/project]')
@@ -12,6 +12,8 @@ cmd
   .option('-d, --cwd', 'motley project directory')
   .option('--install', 'install dependencies automatically')
   .option('--port <port>', 'specify listening port')
+  .option('--tests', 'run tests')
+  .option('--test <file>', 'run a single test')
   .description('run a motley project')
 
 cmd.parse(process.argv);
@@ -33,8 +35,47 @@ else if (stat.isFile()) {
   motleyFile = path.basename(motleyFile);
 }
 
+if (cmd.test) cmd.tests = true;
+if (cmd.tests && !process.env.MOTLEY_TEST) {
+  process.env.MOTLEY_TEST = '1';
+  // marshal the marshallers
+  var proc_motley = child_process.spawn(path.resolve(__dirname, 'motley'), [path.resolve(cwd, motleyFile)]);
+  process.on('exit', function () {
+    proc_motley.kill();
+  });
+  proc_motley.stdout.on('data', function (data) {
+    var portMatch = data.toString().match(/server running at http:\/\/localhost:(.*)\/\n/i);
+    assert(portMatch);
+    port = portMatch[1];
+    var mocha_path = path.resolve(__dirname, '../node_modules/.bin/mocha');
+    var mocha_env = {};
+    Object.keys(process.env).forEach(function (k) {
+      mocha_env[k] = process.env[k];
+    });
+    mocha_env.MOTLEY_PORT = port;
+    var mocha_args = [
+      '--reporter', 'spec',
+      '--timeout', '10s',
+      '--bail',
+      '--require', path.resolve(__dirname, '../test/common.js')
+    ];
+    if (cmd.test) mocha_args.push(cmd.test);
+    var proc_mocha = child_process.spawn(mocha_path, mocha_args, {env: mocha_env});
+    proc_mocha.stdout.pipe(process.stdout);
+    proc_mocha.stderr.pipe(process.stderr);
+    proc_mocha.on('exit', function (code) {
+      assert.equal(code, 0);
+      proc_motley.kill();
+    });
+    process.on('exit', function () {
+      proc_mocha.kill();
+    });
+  });
+  return;
+}
+
 if (cmd.install) {
-  exec('npm install', {cwd: cwd}, function (err, stdout, stderr) {
+  child_process.exec('npm install', {cwd: cwd}, function (err, stdout, stderr) {
     assert.ifError(err);
     motley(motleyFile, cwd);
   });

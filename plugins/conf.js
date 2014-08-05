@@ -4,6 +4,7 @@ var Mayonnaise = require('mayonnaise').Mayonnaise
   , path = require('path')
   , merge = require('merge')
   , prompt = require('cli-prompt')
+  , idgen = require('idgen')
 
 module.exports = function (app) {
   function Conf (specs) {
@@ -17,6 +18,9 @@ module.exports = function (app) {
       // special port override
       if (typeof process.env.MOTLEY_PORT !== 'undefined') {
         app.conf.port = process.env.MOTLEY_PORT;
+      }
+      if (typeof process.env.MOTLEY_TEST !== 'undefined') {
+        app.conf.id = idgen();
       }
       function initPlugins () {
         var plugins = require('./plugins')(app)();

@@ -1,22 +1,4 @@
 describe('hello world example', function () {
-  var proc, port;
-  before(function (done) {
-    var binPath = path.resolve(__dirname, '../bin/motley');
-    proc = spawn(binPath, ['--install', '--port=0'], {cwd: examples + '/hello-world'});
-    process.on('exit', function () {
-      proc.kill();
-    });
-    proc.stdout.on('data', function (data) {
-      var portMatch = data.toString().match(/server running at http:\/\/localhost:(.*)\/\n/i);
-      assert(portMatch);
-      port = portMatch[1];
-      assert.notEqual(port, '3000');
-      done();
-    });
-  });
-  after(function () {
-    if (proc) proc.kill();
-  });
   it('GET /', function (done) {
     request('http://localhost:' + port + '/', function (err, resp, body) {
       assert.ifError(err);
