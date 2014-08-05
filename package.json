@@ -28,9 +28,10 @@
     "ncp": "^0.5.1",
     "pause": "0.0.1",
     "qs": "^0.6.6",
+    "request": "^2.36.0",
     "rimraf": "^2.2.8",
     "sess": "^0.1.4",
-    "request": "^2.36.0"
+    "tough-cookie": "^0.12.1"
   },
   "devDependencies": {
     "marked": "^0.3.2",

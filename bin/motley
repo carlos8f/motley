@@ -39,7 +39,7 @@ if (cmd.testFile) cmd.test = true;
 if (cmd.test && !process.env.MOTLEY_TEST) {
   process.env.MOTLEY_TEST = '1';
   // marshal the marshallers
-  var motley_args = [path.resolve(cwd, motleyFile)];
+  var motley_args = ['--port=0', path.resolve(cwd, motleyFile)];
   if (cmd.install) motley_args.unshift('-i');
   var proc_motley = child_process.spawn(path.resolve(__dirname, 'motley'), motley_args);
   process.on('exit', function () {
