@@ -1,6 +1,6 @@
 {
   "name": "motley",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "cyberpunking the internets",
   "main": "index.js",
   "bin": {
