@@ -48,7 +48,6 @@ if (cmd.test && !process.env.MOTLEY_TEST) {
     assert(portMatch);
     port = portMatch[1];
     proc_motley.stdout.pipe(process.stdout);
-    proc_motley.stderr.pipe(process.stderr);
     var mocha_path = path.resolve(__dirname, '../node_modules/.bin/mocha');
     var mocha_env = {};
     Object.keys(process.env).forEach(function (k) {
@@ -73,6 +72,10 @@ if (cmd.test && !process.env.MOTLEY_TEST) {
       proc_mocha.kill();
     });
   });
+  proc_motley.on('exit', function (code) {
+    if (code !== 0) process.exit(code);
+  });
+  proc_motley.stderr.pipe(process.stderr);
   return;
 }
 
