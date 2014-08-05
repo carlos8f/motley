@@ -12,8 +12,8 @@ cmd
   .option('-d, --cwd', 'motley project directory')
   .option('--install', 'install dependencies automatically')
   .option('--port <port>', 'specify listening port')
-  .option('--tests', 'run tests')
-  .option('--test <file>', 'run a single test')
+  .option('--test', 'run tests')
+  .option('--testFile <file>', 'run a single test')
   .description('run a motley project')
 
 cmd.parse(process.argv);
@@ -35,8 +35,8 @@ else if (stat.isFile()) {
   motleyFile = path.basename(motleyFile);
 }
 
-if (cmd.test) cmd.tests = true;
-if (cmd.tests && !process.env.MOTLEY_TEST) {
+if (cmd.testFile) cmd.test = true;
+if (cmd.test && !process.env.MOTLEY_TEST) {
   process.env.MOTLEY_TEST = '1';
   // marshal the marshallers
   var proc_motley = child_process.spawn(path.resolve(__dirname, 'motley'), [path.resolve(cwd, motleyFile)]);
@@ -59,7 +59,7 @@ if (cmd.tests && !process.env.MOTLEY_TEST) {
       '--bail',
       '--require', path.resolve(__dirname, '../test/common.js')
     ];
-    if (cmd.test) mocha_args.push(cmd.test);
+    if (cmd.testFile) mocha_args.push(cmd.testFile);
     var proc_mocha = child_process.spawn(mocha_path, mocha_args, {env: mocha_env});
     proc_mocha.stdout.pipe(process.stdout);
     proc_mocha.stderr.pipe(process.stderr);
