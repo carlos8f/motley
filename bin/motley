@@ -64,8 +64,8 @@ if (cmd.test && !process.env.MOTLEY_TEST) {
     proc_mocha.stdout.pipe(process.stdout);
     proc_mocha.stderr.pipe(process.stderr);
     proc_mocha.on('exit', function (code) {
-      assert.equal(code, 0);
       proc_motley.kill();
+      if (code !== 0) process.exit(code);
     });
     process.on('exit', function () {
       proc_mocha.kill();
