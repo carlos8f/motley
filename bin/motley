@@ -10,9 +10,9 @@ cmd
   .usage('motley [path/to/project]')
   .version(require('../package.json').version)
   .option('-d, --cwd', 'motley project directory')
-  .option('--install', 'install dependencies automatically')
-  .option('--port <port>', 'specify listening port')
-  .option('--test', 'run tests')
+  .option('-i, --install', 'install dependencies automatically')
+  .option('-p, --port <port>', 'specify listening port')
+  .option('-t, --test', 'run tests')
   .option('--testFile <file>', 'run a single test')
   .description('run a motley project')
 
@@ -39,7 +39,9 @@ if (cmd.testFile) cmd.test = true;
 if (cmd.test && !process.env.MOTLEY_TEST) {
   process.env.MOTLEY_TEST = '1';
   // marshal the marshallers
-  var proc_motley = child_process.spawn(path.resolve(__dirname, 'motley'), [path.resolve(cwd, motleyFile)]);
+  var motley_args = [path.resolve(cwd, motleyFile)];
+  if (cmd.install) motley_args.unshift('-i');
+  var proc_motley = child_process.spawn(path.resolve(__dirname, 'motley'), motley_args);
   process.on('exit', function () {
     proc_motley.kill();
   });
