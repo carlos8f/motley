@@ -47,6 +47,8 @@ if (cmd.test && !process.env.MOTLEY_TEST) {
     var portMatch = data.toString().match(/server running at http:\/\/localhost:(.*)\/\n/i);
     assert(portMatch);
     port = portMatch[1];
+    proc_motley.stdout.pipe(process.stdout);
+    proc_motley.stderr.pipe(process.stderr);
     var mocha_path = path.resolve(__dirname, '../node_modules/.bin/mocha');
     var mocha_env = {};
     Object.keys(process.env).forEach(function (k) {
