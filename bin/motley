@@ -43,6 +43,7 @@ if (cmd.test && !process.env.MOTLEY_TEST) {
   process.on('exit', function () {
     proc_motley.kill();
   });
+  var port;
   proc_motley.stdout.on('data', function (data) {
     var portMatch = data.toString().match(/server running at http:\/\/localhost:(.*)\/\n/i);
     assert(portMatch);
@@ -73,7 +74,7 @@ if (cmd.test && !process.env.MOTLEY_TEST) {
     });
   });
   proc_motley.on('exit', function (code) {
-    if (code !== 0) process.exit(code);
+    if (code !== 0 && typeof port === 'undefined') process.exit(code);
   });
   proc_motley.stderr.pipe(process.stderr);
   return;
