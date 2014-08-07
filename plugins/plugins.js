@@ -50,6 +50,14 @@ module.exports = function (app) {
     }
   };
   Plugins.prototype.require = function (p) {
+    var self = this;
+    if (Array.isArray(p)) return p.map(function (arg) {
+      return self.require(arg);
+    });
+    var args = [].slice.call(arguments);
+    if (args.length > 1) return args.map(function (arg) {
+      return self.require(arg);
+    });
     var file = this.getPlugin(p);
     if (typeof file === 'undefined') throw new Error('plugin `' + p + '` not found');
     var key = file.pluginPath.replace(/^\//, '');
