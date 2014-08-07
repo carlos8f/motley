@@ -1,2 +1,2 @@
-plugins: hello.js
+plugins: main.js
 minimal: true

@@ -8,7 +8,10 @@ module.exports = function (app) {
     var self = this;
     this.once('ready', function (files) {
       files.forEach(function (file) {
-        if (file.pluginPath) self.require(file.pluginPath);
+        if (file.pluginPath) {
+          if (app.conf.minimal && file.pluginPath !== 'main' && file.pluginPath !== 'conf' && file.pluginPath !== 'plugins') return;
+          self.require(file.pluginPath);
+        }
       });
     });
     this.on('all', function (op, file) {
@@ -61,7 +64,6 @@ module.exports = function (app) {
   var fn = function () {
     var specs = [];
     app._conf.files().forEach(function (file) {
-      if (file.weight === 0 && app.conf.minimal) return;
       if (file.plugin.plugins) specs.push({globs: file.plugin.plugins, cwd: file.cwd});
       if (file.plugin.collections) specs.push({globs: file.plugin.collections, cwd: file.cwd});
     });
