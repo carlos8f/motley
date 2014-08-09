@@ -8,7 +8,7 @@
     "motley-init": "./bin/motley-init"
   },
   "dependencies": {
-    "buffet": "^1.0.2",
+    "buffet": "^1.0.4",
     "cli-prompt": "^0.4.1",
     "commander": "^2.2.0",
     "downer": "git+https://gist.github.com/285c2a59b6cae3a42e61.git",
