@@ -24,6 +24,7 @@
     "middler": "^0.7.1",
     "mkdirp": "^0.5.0",
     "mocha": "^1.21.3",
+    "modeler": "^0.4.7",
     "modeler-leveldb": "^0.4.0",
     "ncp": "^0.5.1",
     "pause": "0.0.1",
