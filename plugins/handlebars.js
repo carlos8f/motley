@@ -1,5 +1,5 @@
-var handlebars = require('downer').handlebars;
+var handlebars = require('handlebars');
 
 module.exports = function (app) {
-  return handlebars;  
+  return handlebars.create();
 };

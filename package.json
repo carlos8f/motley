@@ -8,14 +8,15 @@
     "motley-init": "./bin/motley-init"
   },
   "dependencies": {
-    "buffet": "^1.0.4",
     "addr": "^1.0.0",
+    "buffet": "^1.0.4",
     "cli-prompt": "^0.4.1",
     "commander": "^2.2.0",
-    "downer": "git+https://gist.github.com/285c2a59b6cae3a42e61.git",
+    "downer": "git+https://gist.github.com/285c2a59b6cae3a42e61.git#v0.0.1",
     "expres": "0.0.4",
     "formidable": "^1.0.14",
     "gist-cli": "git+https://github.com/carlos8f/gist-cli.git",
+    "handlebars": "^2.0.0-alpha.4",
     "href": "^0.1.1",
     "idgen": "^2.0.0",
     "js-yaml": "^3.0.2",

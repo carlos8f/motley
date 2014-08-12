@@ -1,8 +1,8 @@
 module.exports = function (app) {
   if (app.views) {
     var views = app.views();
-    return views ? views.middleware(app.conf.render) : function (req, res, next) { next() };
+    if (views) return views.middleware(app.conf.render);
   }
-  else return function (req, res, next) { next() };
+  return function (req, res, next) { next() };
 };
 module.exports.weight = -1000;
