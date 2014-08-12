@@ -2,7 +2,9 @@ collections: "collections/*.js"
 controllers: "controllers/*.js"
 plugins: "plugins/*.js"
 public: "public/**/*"
-views: "views/**/*.hbs"
+views:
+  - "views/**/*.hbs"
+  - "public/templates/**/*.hbs"
 port: 3000
 disable:
   - favicon
