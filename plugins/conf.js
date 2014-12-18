@@ -7,7 +7,9 @@ var Mayonnaise = require('mayonnaise').Mayonnaise
   , idgen = require('idgen')
 
 module.exports = function (app) {
-  function Conf (specs) {
+  function Conf (specs, pluginName) {
+    this.specs = specs;
+    this.pluginName = pluginName;
     Mayonnaise.call(this, specs);
     var self = this;
     this.once('update', function (file) {
@@ -49,7 +51,12 @@ module.exports = function (app) {
     if (file.name.match(/\.ya?ml$/)) return yaml.safeLoad(file.data({encoding: 'utf8'}));
   };
   Conf.prototype.get = function () {
-    return this.getPlugin('/motley', {merge: merge});
+    var merged = this.getPlugin('/motley', {merge: merge});
+    if (this.pluginName != 'motley') {
+      var customConf = this.getPlugin('/' + this.pluginName).plugin;
+      merged = merge(merged, customConf);
+    }
+    return merged;
   };
 
   var fn = function (motleyFile, cwd) {
@@ -63,7 +70,8 @@ module.exports = function (app) {
         globs: [motleyFile]
       }
     ];
-    return new Conf(specs);
+    var pluginName = path.basename(motleyFile, path.extname(motleyFile));
+    return new Conf(specs, pluginName);
   };
   fn.Conf = Conf;
   return fn;
