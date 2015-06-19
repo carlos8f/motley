@@ -27,7 +27,7 @@
     "mkdirp": "^0.5.0",
     "mocha": "^2.0.1",
     "modeler": "^0.4.7",
-    "modeler-leveldb": "^0.4.0",
+    "modeler-leveldb": "^0.5.2",
     "ncp": "^0.5.1",
     "pause": "0.0.1",
     "qs": "^0.6.6",
