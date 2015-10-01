@@ -20,7 +20,7 @@
     "href": "^0.1.1",
     "idgen": "^2.0.0",
     "js-yaml": "^3.0.2",
-    "level": "^0.18.0",
+    "level": "^1.3.0",
     "mayonnaise": "^0.3.1",
     "merge": "^1.1.3",
     "middler": "^0.7.1",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "marked": "^0.3.2",
-    "zombie": "^2.0.0-alpha31"
+    "zombie": "^4.1.0"
   },
   "scripts": {
     "test": "make test"
