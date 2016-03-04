@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "marked": "^0.3.2",
-    "zombie": "^4.1.0"
+    "zombie": "^4.2.1"
   },
   "scripts": {
     "test": "make test"
