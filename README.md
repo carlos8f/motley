@@ -66,6 +66,37 @@ Simply run `motley` in the project directory, the web server will start, and edi
 Terra Eclipse, Inc. is a nationally recognized political technology and
 strategy firm located in Aptos, CA and Washington, D.C.
 
+## Mistakes
+
+motley mistakes
+
+- just being in the filesystem shouldn't mean it's "enabled"
+- binded to modeler
+- comes with some useless stuff, old versions of request, etc
+- binary thing is weird (invisible dependency, unable to introduce breaking changes to binary)
+- namespace is (hard to explain and) shared between all types, levels
+- too many watchers
+- too much buffering of static resources
+- no unmount method, or async mount method
+- leveldb :(
+- conf is conflated with "main entry point"
+  - hard to make scripts
+  - hard to have multiple confs
+- gist stuff probably isn't popular (motivation for flexible layout thing)
+- no clustering
+- no separation of plugin system vs. web server (scripts)
+- weird that sessions and users models are built-in
+- glob patterns are sloopy
+
+
+goals
+
+- eliminate in-memory caching
+- allow plugins to respond to unmount/remount
+- should be no dependence on database
+- traditional dependency based instead of -g binary
+
+
 - - -
 
 ### License: MIT

@@ -21,4 +21,3 @@ module.exports = function (app) {
     else next();
   };
 };
-module.exports.weight = -100;

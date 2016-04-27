@@ -1,9 +1,8 @@
 var addr = require('addr');
 
-module.exports = function (app) {
+module.exports = function container (get) {
   return function (req, res, next) {
-    req.addr = addr(req, app.conf.proxies || ['127.0.0.1']);
+    req.addr = addr(req, get('conf.proxies'));
     next();
   };
 };
-module.exports.weight = -2000;
