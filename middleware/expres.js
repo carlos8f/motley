@@ -1,6 +1,3 @@
-var expres = require('expres');
-
-module.exports = function (app) {
-  return expres.middleware;
+module.exports = function container (get) {
+  return get('vendor.expres').middleware;
 };
-module.exports.weight = -1000;

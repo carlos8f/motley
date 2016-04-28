@@ -1,12 +1,10 @@
-var pause = require('pause');
-
-module.exports = function (app) {
+module.exports = function container (get) {
   return function (req, res, next) {
     // buffer incoming data until unpause() is called
     req.pause = function () {
       if (req.paused) return;
       req.paused = true;
-      var paused = pause(req);
+      var paused = get('vendor.pause')(req);
       req.unpause = function () {
         if (!req.paused) return;
         req.paused = false;
@@ -17,4 +15,3 @@ module.exports = function (app) {
     next();
   };
 };
-module.exports.weight = -5000;

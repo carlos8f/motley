@@ -1,8 +1,6 @@
-var addr = require('addr');
-
 module.exports = function container (get) {
   return function (req, res, next) {
-    req.addr = addr(req, get('conf.proxies'));
+    req.addr = get('vendor.addr')(req, get('conf.middleware.addr.proxies'));
     next();
   };
 };

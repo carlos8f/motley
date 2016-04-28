@@ -1,6 +1,3 @@
-var href = require('href');
-
-module.exports = function (app) {
-  return href;
+module.exports = function container (get) {
+  return get('vendor.href');
 };
-module.exports.weight = -2000;

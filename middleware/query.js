@@ -1,11 +1,9 @@
-var qs = require('qs');
-
-module.exports = function (app) {
+module.exports = function container (get) {
   return function (req, res, next) {
     if (!req.query) {
       if (!req.href) return next(new Error('query requires href'));
       try {
-        req.query = qs.parse(req.href.query);
+        req.query = get('vendor.qs').parse(req.href.query);
       }
       catch (e) {
         return next(e);
@@ -14,4 +12,3 @@ module.exports = function (app) {
     next();
   };
 };
-module.exports.weight = -1000;

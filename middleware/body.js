@@ -1,10 +1,8 @@
-var formidable = require('formidable');
-
-module.exports = function (app) {
+module.exports = function container (get) {
   return function (req, res, next) {
     if (req.body || req.files) return next();
     if (typeof req.unpause === 'undefined') return next(new Error('body requires pause'));
-    var form = new formidable.IncomingForm();
+    var form = new get('vendor.formidable').IncomingForm();
     try {
       form.parse(req, function (err, fields, files) {
         req.body = fields;
@@ -22,4 +20,3 @@ module.exports = function (app) {
     req.unpause();
   };
 };
-module.exports.weight = -1000;

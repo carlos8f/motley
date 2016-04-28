@@ -1,12 +1,5 @@
-var sess = require('sess');
-
-module.exports = function (app) {
-  var conf = app.conf.session || {};
-  conf.cookie || (conf.cookie = {});
-  if (typeof conf.cookie.maxAge === 'undefined') conf.cookie.maxAge = 86400 * 365;
-  conf.key || (conf.key = app.conf.id);
-  app.require('sessions');
-  conf.sessions = app.sessions;
-  return sess(conf);
+module.exports = function container (get) {
+  var options = get('conf.middleware.session');
+  options.sessions = get('collections.sessions');
+  return get('vendor.sess')(options);
 };
-module.exports.weight = -500;

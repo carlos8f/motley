@@ -1,6 +1,9 @@
 module.exports = {
   _ns: 'motley',
-  'db.collection': require('./collection'),
-  'db.sessions': require('./sessions'),
-  'db.users': require('./users')
+  _folder: 'db',
+
+  'redis_client': null,
+  'mongo_client': null,
+  'connect': require('./connect'),
+  'createCollection': require('./createCollection')
 }

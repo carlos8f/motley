@@ -1,11 +1,22 @@
 module.exports = {
   _ns: 'motley',
-  'vendor.commander': require('commander'),
-  'vendor.controller': require('middler'),
-  'vendor.handlebars': require('handlebars'),
-  'vendor.idgen': require('idgen'),
-  'vendor.mkdirp': require('mkdirp'),
-  'vendor.prompt': require('cli-prompt'),
-  'vendor.request': require('request'),
-  'vendor.rimraf': require('rimraf')
+  _folder: 'vendor',
+
+  'addr': require('addr'),
+  'buffet': require('buffet'),
+  'commander': require('commander'),
+  'controller': require('middler'),
+  'downer': require('downer'),
+  'handlebars': require('handlebars'),
+  'idgen': require('idgen'),
+  'middler': require('middler'),
+  'mkdirp': require('mkdirp'),
+  'prompt': require('cli-prompt'),
+  'qs': require('qs'),
+  'request': require('request'),
+  'rimraf': require('rimraf'),
+  'sess': require('sess'),
+  'sosa_mem': require('sosa_mem'),
+  'sosa_mongo': require('sosa_mongo'),
+  'sosa_redis': require('sosa_redis')
 }
