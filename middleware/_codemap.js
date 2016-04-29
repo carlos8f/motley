@@ -21,7 +21,7 @@ module.exports = {
   'handlers[-40]': ['#middleware.addr', '#middleware.href', '#middleware.query', '#middleware.expres'],
   'handlers[-30]': ['#middleware.session'],
   'handlers[-10]': ['#middleware.body'],
-  'handlers[0]': '#motley:routes.handlers',
+  'handlers[0]': '#routes.handlers',
   'handlers[100000]': ['#middleware.notfound'],
 
   // results

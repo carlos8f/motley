@@ -7,5 +7,5 @@ module.exports = {
   'home': require('./home'),
 
   // stack definition
-  'handlers[0]': '#motley:routes.home'
+  'handlers[0]': '#routes.home'
 }

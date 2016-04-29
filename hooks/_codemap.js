@@ -5,9 +5,9 @@ module.exports = {
 
   // core hook registration
   'boot[]': [],
-  'mount[-10]': '#motley:db.mountCollections',
-  'mount[0]': '#motley:middleware.mountMiddleware',
-  'listen[0]': '#motley:site.listen',
+  'mount[-10]': '#db.mountCollections',
+  'mount[0]': '#middleware.mountMiddleware',
+  'listen[0]': '#site.listen',
 
   // functions
   'runHook': require('./runHook'),

@@ -1,22 +1,31 @@
 ![motley](https://raw.github.com/carlos8f/motley/master/assets/motley-full.png)
 
-test.js:
+## install
+
+> git clone git@github.com:carlos8f/motley-init.git
+> cd motley-init && npm install
+> node server.js
+
+server.js:
 
 ```js
 var motley = require('motley')
 
 var app = motley({
   _ns: 'motley',
+  _maps: [
+    // require()'ed motley plugins go here.
+  ],
   'hooks.listen[]': function container (get) {
     return function task (cb) {
-      console.log('listening on http://localhost:' + get('site.server').address().port + '/');
-      cb();
+      console.log('listening on http://localhost:' + get('site.server').address().port + '/')
+      cb()
     }
   }
 })
 
 app.listen(function (err) {
-  if (err) return console.error(err);
+  if (err) return console.error(err)
 })
 ```
 

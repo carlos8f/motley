@@ -5,7 +5,7 @@ module.exports = {
 
   // site
   'site.port': 3000,
-  'site.title': 'new motley site',
+  'site.title': 'Motley core',
 
   // middleware
   'middleware.session': {
