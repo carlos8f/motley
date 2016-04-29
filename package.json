@@ -5,7 +5,7 @@
   "main": "motley.js",
   "dependencies": {
     "addr": "^1.0.1",
-    "codemap": "^1.2.0",
+    "codemap": "^1.2.2",
     "expres": "0.0.5",
     "formidable": "^1.0.17",
     "href": "^0.1.1",
