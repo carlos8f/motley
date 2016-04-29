@@ -48,3 +48,5 @@ module.exports = function motley () {
   }
   return codemap(rootMap).export()
 }
+
+module.exports.version = require('./package.json').version
