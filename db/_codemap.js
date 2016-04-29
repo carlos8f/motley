@@ -2,8 +2,11 @@ module.exports = {
   _ns: 'motley',
   _folder: 'db',
 
-  'redis_client': null,
-  'mongo_client': null,
-  'connect': require('./connect'),
-  'createCollection': require('./createCollection')
+  'createCollection': require('./createCollection'),
+  'mountCollections': require('./mountCollections'),
+
+  'sessions': require('./sessions'),
+  'users': require('./users'),
+
+  'collections[]': ['#db.sessions', '#db.users']
 }
