@@ -1,28 +1,38 @@
 ![motley](https://raw.github.com/carlos8f/motley/master/assets/motley-full.png)
 
-## install
+## Get Started in 3 shell commands:
 
+```
 > git clone git@github.com:carlos8f/motley-init.git
 > cd motley-init && npm install
 > node server.js
+```
 
-server.js:
+(or just fork the [https://github.com/carlos8f/motley-init](motley-init) repo!)
+
+## Example server.js
 
 ```js
-var motley = require('motley')
+var motley = require('./')
 
-var app = motley({
-  _ns: 'motley',
-  _maps: [
-    // require()'ed motley plugins go here.
-  ],
-  'hooks.listen[]': function container (get) {
-    return function task (cb) {
-      console.log('listening on http://localhost:' + get('site.server').address().port + '/')
-      cb()
+try {
+  var app = motley({
+    _ns: 'motley',
+    _maps: [
+      // require()'ed motley plugins go here.
+    ],
+    'hooks.listen[]': function container (get, set) {
+      return function task (cb) {
+        console.log('listening on http://localhost:' + get('site.server').address().port + '/')
+        cb()
+      }
     }
-  }
-})
+  })
+}
+catch (err) {
+  console.error(err)
+  process.exit(1)
+}
 
 app.listen(function (err) {
   if (err) return console.error(err)

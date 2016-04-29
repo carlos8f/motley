@@ -6,7 +6,7 @@ try {
     _maps: [
       // require()'ed motley plugins go here.
     ],
-    'hooks.listen[]': function container (get) {
+    'hooks.listen[]': function container (get, set) {
       return function task (cb) {
         console.log('listening on http://localhost:' + get('site.server').address().port + '/')
         cb()
