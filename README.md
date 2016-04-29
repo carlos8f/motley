@@ -8,7 +8,7 @@ cd motley-init && npm install
 node server.js
 ```
 
-(or just fork the [https://github.com/carlos8f/motley-init](motley-init) repo!)
+(or just fork the [motley-init](https://github.com/carlos8f/motley-init) repo!)
 
 ## Example server.js
 
