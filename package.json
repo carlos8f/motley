@@ -2,7 +2,7 @@
   "name": "motley",
   "version": "1.6.1",
   "description": "highly pluggable, agile http site development framework",
-  "main": "index.js",
+  "main": "motley.js",
   "dependencies": {
     "addr": "^1.0.1",
     "codemap": "^1.2.0",
