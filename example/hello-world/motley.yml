@@ -1,5 +1,0 @@
-id: VWUGixMmbDjfOmq5
-controllers: "controllers/*.js"
-public: "public/**/*"
-views: "views/**/*.hbs"
-port: 3000

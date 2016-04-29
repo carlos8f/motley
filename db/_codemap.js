@@ -1,12 +1,15 @@
 module.exports = {
+  // meta
   _ns: 'motley',
   _folder: 'db',
 
+  // functions
   'createCollection': require('./createCollection'),
   'mountCollections': require('./mountCollections'),
 
-  'sessions': require('./sessions'),
-  'users': require('./users'),
+  // named collections
+  'motley_sessions': require('./motley_sessions'),
 
-  'collections[]': ['#db.sessions', '#db.users']
+  // collection registration
+  'collections[]': ['#db.motley_sessions']
 }

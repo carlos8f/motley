@@ -1,44 +1,22 @@
 {
   "name": "motley",
   "version": "1.6.1",
-  "description": "cyberpunking the internets",
+  "description": "highly pluggable, agile http site development framework",
   "main": "index.js",
-  "bin": {
-    "motley": "./bin/motley",
-    "motley-init": "./bin/motley-init"
-  },
   "dependencies": {
-    "addr": "^1.0.0",
-    "buffet": "^1.0.4",
+    "addr": "^1.0.1",
     "codemap": "^1.2.0",
-    "downer": "^0.0.2",
-    "expres": "^0.0.4",
-    "formidable": "^1.0.14",
-    "handlebars": "^2.0.0-alpha.4",
+    "expres": "0.0.5",
+    "formidable": "^1.0.17",
     "href": "^0.1.1",
-    "idgen": "^2.0.0",
-    "middler": "^0.7.1",
-    "pause": "0.0.1",
-    "qs": "^0.6.6",
+    "middler": "^0.8.1",
+    "pause": "^0.1.0",
+    "qs": "^6.1.0",
     "run-series": "^1.1.4",
-    "sess": "^0.1.4",
-    "sosa_mem": "^0.2.0"
+    "sosa_mem": "^0.2.1",
+    "sosa_session": "^0.2.0"
   },
-  "devDependencies": {
-    "marked": "^0.3.2",
-    "zombie": "^4.2.1",
-    "request": "^2.36.0",
-    "rimraf": "^2.2.8",
-    "mkdirp": "^0.5.0",
-    "mocha": "^2.0.1",
-    "ncp": "^0.5.1",
-    "gist-cli": "git+https://github.com/carlos8f/gist-cli.git",
-    "cli-prompt": "^0.4.1",
-    "commander": "^2.2.0"
-  },
-  "scripts": {
-    "test": "make test"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/carlos8f/motley.git"
@@ -47,8 +25,12 @@
   "keywords": [
     "app",
     "framework",
-    "bacon",
-    "yeah"
+    "http",
+    "api",
+    "json",
+    "pluggable",
+    "modular",
+    "extensible"
   ],
   "author": "Carlos Rodriguez <carlos@s8f.org> (http://s8f.org/)",
   "license": "MIT",

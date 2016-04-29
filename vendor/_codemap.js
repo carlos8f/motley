@@ -1,15 +1,17 @@
 module.exports = {
+  // meta
   _ns: 'motley',
   _folder: 'vendor',
 
+  // vendor repo
   'addr': require('addr'),
-  'buffet': require('buffet'),
-  'downer': require('downer'),
-  'handlebars': require('handlebars'),
-  'idgen': require('idgen'),
+  'expres': require('expres'),
+  'formidable': require('formidable'),
+  'href': require('href'),
   'middler': require('middler'),
+  'pause': require('pause'),
   'qs': require('qs'),
   'run-series': require('run-series'),
-  'sess': require('sess'),
-  'sosa_mem': require('sosa_mem')
+  'sosa_mem': require('sosa_mem'),
+  'sosa_session': require('sosa_session')
 }

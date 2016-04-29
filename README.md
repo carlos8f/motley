@@ -1,101 +1,24 @@
 ![motley](https://raw.github.com/carlos8f/motley/master/assets/motley-full.png)
 
-[![build status](https://secure.travis-ci.org/carlos8f/motley.png)](http://travis-ci.org/carlos8f/motley)
+test.js:
 
-[![NPM](https://nodei.co/npm/motley.png?downloads=true)](https://nodei.co/npm/motley/)
+```js
+var motley = require('motley')
 
-## Introduction
+var app = motley({
+  _ns: 'motley',
+  'hooks.listen[]': function container (get) {
+    return function task (cb) {
+      console.log('listening on http://localhost:' + get('site.server').address().port + '/');
+      cb();
+    }
+  }
+})
 
-Cyberpunking the internets. That's what you should be doing right now, and the Motley node.js framework makes it easy! Lovingly crafted in an efficient Model-View-Controller style, Motley combines the best tools for making websites:
-
-- [schemaless, portable data layer](https://www.npmjs.org/package/modeler)
-- [Handlebars views](https://www.npmjs.org/package/templ)
-- [express-compatible](https://github.com/cpsubrian/node-expres)
-  [middleware and controllers](https://www.npmjs.org/package/middler)
-- [file server with in-memory cache](https://www.npmjs.org/package/buffet)
-- [intelligent gzip compression and e-tag support](https://www.npmjs.org/package/dish)
-- [session persistence and authentication](https://github.com/carlos8f/sess)
-- [auto-loadable "plugin" application structure](https://gist.github.com/carlos8f/cd931ba95481a7570602)
-
-...with stupidly awesome gist integration, allowing you to kickstart a prototype or venture into complete application development, all with just a couple shell commands.
-
-It's worth noting that if you're coming from [express.js](http://expressjs.com/), Motley emulates many express/connect features, such as middleware, views, and sessions. In most cases, you'll be able to use your favorite connect/express middleware and port your apps with ease.
-
-## Installation
-
-`$ npm install -g motley`
-
-## Famous two-line bootstrap
-
+app.listen(function (err) {
+  if (err) return console.error(err);
+})
 ```
-$ motley-init my-project 
-$ motley my-project
-server running at http://localhost:3000/
-```
-
-![screenshot](https://raw.githubusercontent.com/carlos8f/motley/master/assets/boot.png)
-
-## One-line gist creation
-
-```
-$ motley-init --gist [--public] [--open] [my-project]
-```
-
-This will:
-
-- prompt you for your github credentials, which are then exchanged
-  for an [access token](https://www.npmjs.org/package/gist-cli) and cached at `~/.gist-login`
-- create a gist containing [a new motley project](https://gist.github.com/carlos8f/b7d6f5b60306e63da635), optionally public with `--public`
-- check out the gist's git repo via ssh, giving you version control
-- optionally open your browser and point it to the gist with `--open`
-
-Then you have a brand new web app, runnable with the `motley` binary, tied to a private git repo, backed by [gist.github.com](https://gist.github.com/), and all you had to do was type `motley-init`!
-
-Simply run `motley` in the project directory, the web server will start, and edit the source code to do what you want!
-
-## Examples
-
-[Example apps](https://github.com/carlos8f/motley/tree/master/example) using Motley:
-
-- [the &ldquo;hello world&rdquo; app](https://github.com/carlos8f/motley/tree/master/example/hello-world)
-- [simple blog with in-memory database](https://github.com/carlos8f/motley/tree/master/example/blog)
-- [simple blog with LevelDB persistence, as a gist](https://gist.github.com/carlos8f/b7d6f5b60306e63da635)
-- [a mini app](https://github.com/carlos8f/motley/tree/master/example/minimal)
-
-### Developed by [Terra Eclipse](http://www.terraeclipse.com)
-Terra Eclipse, Inc. is a nationally recognized political technology and
-strategy firm located in Aptos, CA and Washington, D.C.
-
-## Mistakes
-
-motley mistakes
-
-- just being in the filesystem shouldn't mean it's "enabled"
-- binded to modeler
-- comes with some useless stuff, old versions of request, etc
-- binary thing is weird (invisible dependency, unable to introduce breaking changes to binary)
-- namespace is (hard to explain and) shared between all types, levels
-- too many watchers
-- too much buffering of static resources
-- no unmount method, or async mount method
-- leveldb :(
-- conf is conflated with "main entry point"
-  - hard to make scripts
-  - hard to have multiple confs
-- gist stuff probably isn't popular (motivation for flexible layout thing)
-- no clustering
-- no separation of plugin system vs. web server (scripts)
-- weird that sessions and users models are built-in
-- glob patterns are sloopy
-
-
-goals
-
-- eliminate in-memory caching
-- allow plugins to respond to unmount/remount
-- should be no dependence on database
-- traditional dependency based instead of -g binary
-
 
 - - -
 

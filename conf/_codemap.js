@@ -1,19 +1,13 @@
 module.exports = {
+  // meta
   _ns: 'motley',
   _folder: 'conf',
 
+  // site
   'site.port': 3000,
   'site.title': 'new motley site',
 
-  'middleware.static': {},
-  'middleware.static.paths[]': 'public/**/*',
-  'middleware.render': {},
-  'middleware.render.paths[]': [
-    'views/**/*.hbs',
-    'views/**/*.handlebars',
-    'views/**/*.md',
-    'views/**/*.markdown'
-  ],
+  // middleware
   'middleware.session': {
     cookie: {
       maxAge: 86400 * 365
