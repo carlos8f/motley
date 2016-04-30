@@ -8,7 +8,7 @@ try {
     ],
     'hooks.listen[]': function container (get, set) {
       return function task (cb) {
-        console.log('listening on http://localhost:' + get('site.server').address().port + '/')
+        get('vendor.console').log('listening on http://localhost:' + get('site.server').address().port + '/')
         cb()
       }
     }
