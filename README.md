@@ -13,7 +13,7 @@ node server.js
 ## Example server.js
 
 ```js
-var motley = require('./')
+var motley = require('motley')
 
 try {
   var app = motley({
@@ -35,7 +35,10 @@ catch (err) {
 }
 
 app.listen(function (err) {
-  if (err) return console.error(err)
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
 })
 ```
 
