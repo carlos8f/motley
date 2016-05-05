@@ -1,3 +1,3 @@
 module.exports = function container (get) {
-  return get('vendor.href');
-};
+  return get('vendor.href')
+}

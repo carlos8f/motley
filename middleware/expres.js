@@ -1,3 +1,3 @@
 module.exports = function container (get) {
-  return get('vendor.expres').middleware;
-};
+  return get('vendor.expres').middleware
+}
