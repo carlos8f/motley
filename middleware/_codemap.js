@@ -13,8 +13,9 @@ module.exports = {
   'middleware.session': require('./session'),
 
   // stack definition
-  'middleware[-50]': ['#middleware.pause'],
-  'middleware[-40]': ['#middleware.addr', '#middleware.href', '#middleware.query', '#middleware.expres'],
+  'middleware[-60]': ['#middleware.pause'],
+  'middleware[-50]': ['#middleware.href'],
+  'middleware[-40]': ['#middleware.addr', '#middleware.query', '#middleware.expres'],
   'middleware[-30]': ['#middleware.session'],
   'middleware[-10]': ['#middleware.body'],
   'middleware[10]': '#controllers',
