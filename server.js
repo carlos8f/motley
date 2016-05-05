@@ -37,25 +37,26 @@ try {
   })
 }
 catch (err) {
-  console.error(err)
+  console.error(err, err.stack)
   process.exit(1)
 }
 
 app.listen(function (err) {
   if (err) {
-    console.error(err)
+    console.error(err, err.stack)
     process.exit(1)
   }
-  app.get('motley:vendor.console').log('motley app is running...')
+  var closed = false
   function onExit () {
+    if (closed) return
+    closed = true
     app.close(function (err) {
       if (err) {
-        console.error(err)
+        console.error(err, err.stack)
         process.exit(1)
       }
     })
   }
-  process.once('beforeExit', onExit)
   process.once('SIGINT', onExit)
   process.once('SIGTERM', onExit)
 })
