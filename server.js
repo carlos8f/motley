@@ -14,7 +14,8 @@ try {
     },
     'middleware[]': function container (get, set) {
       return function handler (req, res, next) {
-        res.rand = Math.random()
+        res.vars || (res.vars = {})
+        res.vars.nonce = Math.random()
         next()
       }
     },
@@ -24,7 +25,7 @@ try {
           res.json({
             'welcome': 'to ' + get('conf.site.title') + '!',
             'version': require('./package.json').version,
-            'nonce': res.rand
+            'nonce': res.vars.nonce
           })
         })
     },
@@ -37,22 +38,22 @@ try {
   })
 }
 catch (err) {
-  console.error(err, err.stack)
+  console.error(err)
+  console.error(err.stack)
   process.exit(1)
 }
 
 app.listen(function (err) {
   if (err) {
-    console.error(err, err.stack)
+    console.error(err)
+    console.error(err.stack)
     process.exit(1)
   }
-  var closed = false
   function onExit () {
-    if (closed) return
-    closed = true
     app.close(function (err) {
       if (err) {
-        console.error(err, err.stack)
+        console.error(err)
+        console.error(err.stack)
         process.exit(1)
       }
     })
