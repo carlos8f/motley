@@ -53,7 +53,6 @@ app.listen(function (err) {
         console.error(err)
         process.exit(1)
       }
-      process.exit()
     })
   }
   process.once('beforeExit', onExit)

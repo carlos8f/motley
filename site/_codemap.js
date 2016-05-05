@@ -6,6 +6,7 @@ module.exports = {
   // functions
   'listen': require('./listen'),
   'mountMiddleware': require('./mountMiddleware'),
+  'closeServer': require('./closeServer'),
 
   // results
   'server': require('./server'),
