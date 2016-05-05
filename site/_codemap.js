@@ -10,5 +10,6 @@ module.exports = {
 
   // results
   'server': require('./server'),
+  'server.sockets': [],
   'router': null
 }

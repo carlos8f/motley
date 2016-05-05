@@ -1,5 +1,5 @@
 module.exports = function container (get, set) {
-  return function task (cb) {
+  return function mountMiddleware (cb) {
     var router = get('vendor.middler')(get('site.server'))
     get('middleware').forEach(function (handler) {
       router.add(handler.handler || handler)

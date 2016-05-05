@@ -1,5 +1,5 @@
 module.exports = function container (get, set) {
-  return function close (cb) {
+  return function runClose (cb) {
     if (get('hooks.closed')) {
       return cb();
     }

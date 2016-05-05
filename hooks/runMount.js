@@ -1,9 +1,9 @@
 module.exports = function container (get, set) {
-  return function mount (cb) {
+  return function runMount (cb) {
     if (!get('hooks.booted')) {
       get('hooks.runBoot')(function (err) {
         if (err) return cb(err);
-        mount(cb)
+        runMount(cb)
       })
       return
     }
