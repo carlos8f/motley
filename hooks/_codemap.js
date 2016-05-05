@@ -8,6 +8,7 @@ module.exports = {
   'mount[-10]': '#db.mountCollections',
   'mount[0]': '#site.mountMiddleware',
   'listen[0]': '#site.listen',
+  'close[]': [],
 
   // functions
   'runHook': require('./runHook'),
