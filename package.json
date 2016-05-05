@@ -6,15 +6,15 @@
   "dependencies": {
     "addr": "^1.0.1",
     "codemap": "^1.2.2",
-    "expres": "0.0.5",
+    "expres": "^0.0.5",
     "formidable": "^1.0.17",
     "href": "^0.1.1",
-    "middler": "^0.8.1",
+    "middler": "^0.8.2",
     "pause": "^0.1.0",
     "qs": "^6.1.0",
     "run-series": "^1.1.4",
-    "sosa_mem": "^0.2.1",
-    "sosa_session": "^0.2.0"
+    "sosa_mem": "^1.0.1",
+    "sosa_session": "^1.0.0"
   },
   "devDependencies": {},
   "repository": {

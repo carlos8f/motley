@@ -23,9 +23,25 @@ try {
     ],
     'hooks.listen[]': function container (get, set) {
       return function task (cb) {
-        console.log('listening on http://localhost:' + get('site.server').address().port + '/')
+        get('vendor.console').log('listening on http://localhost:' + get('site.server').address().port + '/')
         cb()
       }
+    },
+    'middleware[]': function container (get, set) {
+      return function handler (req, res, next) {
+        res.rand = Math.random()
+        next()
+      }
+    },
+    'controllers[]': function container (get, set) {
+      return get('controller')()
+        .get('/', function (req, res, next) {
+          res.json({
+            'welcome': 'to ' + get('conf.site.title') + '!',
+            'version': require('./package.json').version,
+            'nonce': res.rand
+          })
+        })
     }
   })
 }

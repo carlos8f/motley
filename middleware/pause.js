@@ -1,5 +1,5 @@
 module.exports = function container (get) {
-  return function (req, res, next) {
+  return function pause (req, res, next) {
     // buffer incoming data until unpause() is called
     req.pause = function () {
       if (req.paused) return;

@@ -1,5 +1,5 @@
 module.exports = function container (get) {
-  return function (req, res, next) {
+  return function query (req, res, next) {
     if (!req.query) {
       if (!req.href) return next(new Error('query requires href'));
       try {

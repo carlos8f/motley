@@ -3,17 +3,22 @@ module.exports = {
   _ns: 'motley',
   _folder: 'hooks',
 
-  // core hook registration
+  // core hooks
   'boot[]': [],
   'mount[-10]': '#db.mountCollections',
-  'mount[0]': '#middleware.mountMiddleware',
+  'mount[0]': '#site.mountMiddleware',
   'listen[0]': '#site.listen',
 
   // functions
   'runHook': require('./runHook'),
+  'runBoot': require('./runBoot'),
+  'runMount': require('./runMount'),
+  'runListen': require('./runListen'),
+  'runClose': require('./runClose'),
 
   // results
   'booted': false,
   'mounted': false,
-  'listened': false
+  'listened': false,
+  'closed': false
 }

@@ -7,6 +7,10 @@ module.exports = {
   'site.port': 3000,
   'site.title': 'Motley core',
 
+  'db.mem': {
+    hashKeys: true
+  },
+
   // middleware
   'middleware.session': {
     cookie: {

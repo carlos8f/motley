@@ -1,10 +1,10 @@
 module.exports = function container (get, set) {
   return function task (cb) {
     var router = get('vendor.middler')(get('site.server'))
-    get('middleware.handlers').forEach(function (handler) {
-      router.add(handler)
+    get('middleware').forEach(function (handler) {
+      router.add(handler.handler || handler)
     })
-    set('@middleware.router', router)
+    set('@site.router', router)
     setImmediate(cb)
   }
 }

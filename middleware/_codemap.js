@@ -1,29 +1,22 @@
 module.exports = {
   // meta
   _ns: 'motley',
-  _folder: 'middleware',
-
-  // functions  
-  'mountMiddleware': require('./mountMiddleware'),
 
   // named middleware
-  'addr': require('./addr'),
-  'body': require('./body'),
-  'expres': require('./expres'),
-  'href': require('./href'),
-  'notfound': require('./notfound'),
-  'pause': require('./pause'),
-  'query': require('./query'),
-  'session': require('./session'),
+  'middleware.addr': require('./addr'),
+  'middleware.body': require('./body'),
+  'middleware.expres': require('./expres'),
+  'middleware.href': require('./href'),
+  'middleware.notfound': require('./notfound'),
+  'middleware.pause': require('./pause'),
+  'middleware.query': require('./query'),
+  'middleware.session': require('./session'),
 
   // stack definition
-  'handlers[-50]': ['#middleware.pause'],
-  'handlers[-40]': ['#middleware.addr', '#middleware.href', '#middleware.query', '#middleware.expres'],
-  'handlers[-30]': ['#middleware.session'],
-  'handlers[-10]': ['#middleware.body'],
-  'handlers[0]': '#routes.handlers',
-  'handlers[100000]': ['#middleware.notfound'],
-
-  // results
-  'router': null
+  'middleware[-50]': ['#middleware.pause'],
+  'middleware[-40]': ['#middleware.addr', '#middleware.href', '#middleware.query', '#middleware.expres'],
+  'middleware[-30]': ['#middleware.session'],
+  'middleware[-10]': ['#middleware.body'],
+  'middleware[10]': '#controllers',
+  'middleware[100000]': ['#middleware.notfound']
 }
