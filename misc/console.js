@@ -25,11 +25,13 @@ module.exports = function container (get, set) {
       }
     },
     log: function () {
+      if (conf.silent) return
       var args = [].slice.call(arguments)
       this._prefixArgs(args)
       console.log.apply(console, args)
     },
     error: function () {
+      if (conf.silent) return
       var args = [].slice.call(arguments)
       this._prefixArgs(args)
       var msg = '[ERROR]'

@@ -12,7 +12,8 @@ module.exports = {
   'console': {
     timestamp: true,
     workerId: true,
-    colors: true
+    colors: true,
+    silent: false
   },
 
   // site
