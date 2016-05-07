@@ -3,13 +3,21 @@ module.exports = {
   _ns: 'motley',
   _folder: 'conf',
 
-  // site
-  'site.port': 3000,
-  'site.title': 'Motley core',
-
+  // db
   'db.mem': {
     hashKeys: true
   },
+
+  // console
+  'console': {
+    timestamp: true,
+    workerId: true,
+    colors: true
+  },
+
+  // site
+  'site.port': 3000,
+  'site.title': 'Motley core',
 
   // middleware
   'middleware.session': {

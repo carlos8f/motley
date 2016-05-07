@@ -1,5 +1,5 @@
 module.exports = {
   _ns: 'motley',
 
-  'console': console
+  'console': require('./console')
 }
