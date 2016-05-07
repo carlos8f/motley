@@ -23,7 +23,7 @@ try {
     ],
     'hooks.listen[]': function container (get, set) {
       return function task (cb) {
-        get('vendor.console').log('listening on http://localhost:' + get('site.server').address().port + '/')
+        get('console').log('listening on http://localhost:' + get('site.server').address().port + '/')
         setImmediate(cb)
       }
     },
@@ -46,31 +46,27 @@ try {
     },
     'hooks.close[]': function container (get, set) {
       return function task (cb) {
-        get('vendor.console').log('\n\nmotley says goodbye :)\n')
+        get('console').log('\n\nmotley says goodbye :)\n')
         setImmediate(cb)
       }
     }
   })
 }
 catch (err) {
+  exit(err)
+}
+
+function exit (err) {
   console.error(err)
   console.error(err.stack)
   process.exit(1)
 }
 
 app.listen(function (err) {
-  if (err) {
-    console.error(err)
-    console.error(err.stack)
-    process.exit(1)
-  }
+  if (err) exit(err)
   function onExit () {
     app.close(function (err) {
-      if (err) {
-        console.error(err)
-        console.error(err.stack)
-        process.exit(1)
-      }
+      if (err) exit(err)
     })
   }
   process.once('SIGINT', onExit)
