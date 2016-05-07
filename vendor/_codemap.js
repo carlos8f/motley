@@ -5,7 +5,6 @@ module.exports = {
 
   // vendor repo
   'addr': require('addr'),
-  'console': console,
   'expres': require('expres'),
   'formidable': require('formidable'),
   'href': require('href'),

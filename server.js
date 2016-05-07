@@ -8,7 +8,7 @@ try {
     ],
     'hooks.listen[]': function container (get, set) {
       return function task (cb) {
-        get('vendor.console').log('listening on http://localhost:' + get('site.server').address().port + '/')
+        get('console').log('listening on http://localhost:' + get('site.server').address().port + '/')
         setImmediate(cb)
       }
     },
@@ -31,7 +31,7 @@ try {
     },
     'hooks.close[]': function container (get, set) {
       return function task (cb) {
-        get('vendor.console').log('\n\nmotley says goodbye :)\n')
+        get('console').log('\n\nmotley says goodbye :)\n')
         setImmediate(cb)
       }
     }
