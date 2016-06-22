@@ -4,6 +4,7 @@ module.exports = function container (get, set) {
     get('middleware').forEach(function (handler) {
       router.add(handler.handler || handler)
     })
+    router.on('error', get('site.onError'))
     set('@site.router', router)
     setImmediate(cb)
   }

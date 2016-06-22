@@ -7,6 +7,7 @@ module.exports = {
   'listen': require('./listen'),
   'mountMiddleware': require('./mountMiddleware'),
   'closeServer': require('./closeServer'),
+  'onError': require('./onError'),
 
   // results
   'server': require('./server'),
