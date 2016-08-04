@@ -1,6 +1,6 @@
 {
   "name": "motley",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "description": "highly pluggable, agile http site development framework",
   "main": "motley.js",
   "dependencies": {
